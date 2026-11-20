@@ -1,0 +1,98 @@
+name: build-installers
+run-name: "build installers${{ inputs.tag && format(' ({0})', inputs.tag) || '' }}"
+
+# Builds the unsigned desktop installers on GitHub-hosted runners and attaches them to a
+# GitHub release when a tag is given. Windows bundles the NSIS installer around the unpacked
+# app; macOS Intel produces the .app tarball (AI-Q-Setup-mac-x64.app.tar) for manual install.
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Attach artifacts to this existing tag (e.g. v1.0.0); empty = artifacts only"
+        required: false
+        type: string
+
+concurrency:
+  group: build-installers
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  installer:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: mac-x64
+            target: darwin-x64
+            runs-on: macos-26-intel
+          - name: win-x64
+            target: windows-x64
+            runs-on: windows-2025
+    runs-on: ${{ matrix.runs-on }}
+    permissions:
+      contents: write
+    env:
+      OPENCODE_CHANNEL: prod
+      OPENCODE_TARGET: ${{ matrix.target }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Bun
+        uses: ./.github/actions/setup-bun
+
+      # The desktop bundle embeds the CLI for the target platform, so build it first.
+      - name: Build CLI
+        working-directory: packages/cli
+        run: bun run build
+
+      - name: Build desktop
+        working-directory: packages/desktop
+        run: bun run build
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
+
+      - name: Pack (unpacked app)
+        working-directory: packages/desktop
+        timeout-minutes: 60
+        run: bun run pack
+
+      # pack.ts deletes dist/desktop at startup, so the installer input must live outside it.
+      - name: Stage unpacked app
+        working-directory: packages/desktop
+        run: cp -R dist/desktop/app "$RUNNER_TEMP/AIQ-app"
+
+      - name: Pack (installer)
+        working-directory: packages/desktop
+        timeout-minutes: 30
+        run: bun run pack
+        env:
+          OPENCODE_DESKTOP_APP: ${{ runner.temp }}/AIQ-app
+
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: AI-Q-installer-${{ matrix.name }}
+          path: |
+            dist/desktop/*.exe
+            dist/desktop/*.tar
+          if-no-files-found: error
+
+      - name: Release
+        if: inputs.tag != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ inputs.tag }}
+        run: |
+          gh release create "$TAG" --verify-tag --title "$TAG" || true
+          gh release upload "$TAG" --clobber dist/desktop/*.exe dist/desktop/*.tar

@@ -1,0 +1,19 @@
+{
+  "version": "0.0.0-prod-202611180254",
+  "channel": "prod",
+  "tag": "cli-0.0.0-prod-202611180254",
+  "assets": {
+    "bun": {
+      "file": "aiq-cli-win32-x64.zip",
+      "url": "https://github.com/QuanLHK-FSC-HAG/AI-Q/releases/download/cli-0.0.0-prod-202611180254/aiq-cli-win32-x64.zip",
+      "size": 265232384,
+      "exe": "aiq-cli.exe"
+    },
+    "node": {
+      "file": "aiq-cli-node-win32-x64.zip",
+      "url": "https://github.com/QuanLHK-FSC-HAG/AI-Q/releases/download/cli-0.0.0-prod-202611180254/aiq-cli-node-win32-x64.zip",
+      "size": 188030280,
+      "exe": "aiq-cli-node.exe"
+    }
+  }
+}

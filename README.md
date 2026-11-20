@@ -16,7 +16,8 @@
    [ DESIGNED BY QUANLHK WITH AI      ]
 ```
 
-**AI-Powered Coding Assistant · Smart Model Routing · Windows Desktop**
+**AI-Powered Coding Assistant · Smart Model Routing · Windows Desktop**  
+*Designed by QuanLHK with AI*
 
 [![Build](https://img.shields.io/badge/BUILD-20.11.2026-2563EB?style=for-the-badge)](https://github.com/QuanLHK-FSC-HAG/AI-Q/releases)
 ![Router](https://img.shields.io/badge/ROUTER-AIQ%2FAUTO-16A34A?style=for-the-badge)
@@ -62,15 +63,17 @@ AI RESPONSE
 
 ## 02 // INSTALLATION
 
-**Download Windows Installer**
+**Tải bộ cài Windows (1 file)**
 
-https://github.com/QuanLHK-FSC-HAG/AI-Q/releases
+- Tải `AI-Q-Setup-win-x64.exe` từ [Releases](https://github.com/QuanLHK-FSC-HAG/AI-Q/releases).
+- **Cần Internet khi cài đặt:** bộ cài tự tải AI-Q CLI từ GitHub Release trong lúc cài. Nếu không có mạng, cài đặt sẽ dừng (có thể Thử lại/Hủy).
+- Xem chi tiết và cách khắc phục/thủ công: [Cài đặt & CLI](document/CAI_DAT_VA_CLI.md).
 
-**Build from Source**
+**Build từ mã nguồn**
 
 ```powershell
 git clone https://github.com/QuanLHK-FSC-HAG/AI-Q.git
-cd AI-Q
+cd AI-Q/aiq-fork
 bun install
 cd packages/desktop
 bun run build
@@ -91,6 +94,8 @@ DEFAULT_MODEL = aiq/auto
 AI_ACCOUNT    = NOT_REQUIRED
 ```
 
+- **Bắt buộc trước khi sử dụng:** nhập tên người dùng và chấp thuận Điều khoản sử dụng & Chính sách quyền riêng tư.
+
 ## 04 // SECURITY & PRIVACY
 
 ```text
@@ -105,7 +110,7 @@ SECURITY PRINCIPLES
 
 AI-Q có thể gửi dữ liệu đến nhà cung cấp AI để xử lý. Người dùng cần xem xét dữ liệu trước khi gửi và chấp thuận chính sách liên quan.
 
-Hạn mức, quota, tốc độ và khả năng truy cập phụ thuộc vào nhà cung cấp. AI-Q không bảo đảm dịch vụ miễn phí hoặc hoạt động liên tục.
+**Lưu ý:** AI-Q hướng tới trải nghiệm sử dụng miễn phí thông qua `aiq/auto` khi có model khả dụng. Hạn mức/quota, tốc độ và khả năng truy cập phụ thuộc vào nhà cung cấp/model, thời điểm và điều kiện mạng/thiết bị; có thể thay đổi, bị giới hạn hoặc gián đoạn. AI-Q không cam kết miễn phí hay khả dụng liên tục trong mọi trường hợp.
 
 ## 05 // VERSION
 
@@ -146,5 +151,4 @@ https://github.com/QuanLHK-FSC-HAG/AI-Q/releases
 < CODE SMARTER. BUILD FREELY. >
 
 Designed by QuanLHK with AI
-```
-
+```

@@ -1,0 +1,59 @@
+{
+  "schema": "aiq.default-info.p0.v1",
+  "generatedForReview": true,
+  "lastUpdated": "20/11/2026",
+  "app": {
+    "displayName": "AI-Q",
+    "tagline": "TODO: bổ sung tagline (Câu 3)",
+    "defaultLanguage": "vi",
+    "defaultModel": "aiq/auto",
+    "watermark": "Designed by QuanLHK with AI",
+    "logoSource": "D:\\codex\\Q-AI\\AI-Q.png",
+    "logoPolicy": "Đóng gói trong phần mềm, cố gắng ngăn người dùng thay đổi logo sau khi cài."
+  },
+  "author": {
+    "displayName": "QuanLHK",
+    "copyright": "© 2026 QuanLHK. All rights reserved."
+  },
+  "version": {
+    "displayTemplate": "20.11.2026 (phiên bản đặc biệt dành cho {userName})",
+    "channel": "Dev",
+    "installRequiresUserName": true,
+    "hideInternalBuildInfo": true
+  },
+  "links": {
+    "github": "https://github.com/QuanLHK-FSC-HAG/AI-Q",
+    "docs": "https://github.com/QuanLHK-FSC-HAG/AI-Q",
+    "docsNote": "Câu 12 ghi repo; trước đó site Pages là https://quanlhk-fsc-hag.github.io/AI-Q/ - cần xác nhận.",
+    "releases": "https://github.com/QuanLHK-FSC-HAG/AI-Q/releases",
+    "support": "https://github.com/QuanLHK-FSC-HAG/AI-Q/issues",
+    "showSupportLinks": false,
+    "showCredits": false
+  },
+  "about": {
+    "fields": ["appName", "version", "author", "github", "license"],
+    "license": "Giữ LICENSE/NOTICE hiện có"
+  },
+  "policies": {
+    "termsLanguage": "vi",
+    "acceptance": "Hiển thị/chấp thuận tại cài đặt và trong File/About (lấy readme/about) - cần xác nhận bắt buộc hay tham khảo",
+    "usage": "Cá nhân",
+    "quotaNoticeVi": "Hạn mức/quota và khả năng phản hồi có thể thay đổi theo Wi-Fi/ISP, mạng, IP, vùng, proxy/VPN, chất lượng kết nối, thiết bị/phiên bản và model/nhà cung cấp.",
+    "freeMeaning": "Sử dụng theo model/nhà cung cấp khả dụng; aiq/auto tự chọn và xoay model; phụ thuộc hạn mức nhà cung cấp.",
+    "onLimit": "Tự xoay sang model khả dụng khác; hiển thị thông báo khi cần."
+  },
+  "security": {
+    "encryptAtRestP0": ["author", "version", "links", "about"],
+    "method": "app-key obfuscation + encryption",
+    "integrity": "recommended (signature/check)",
+    "machineBound": true,
+    "onDecryptFailure": "recreate defaults from bundled payload",
+    "storageFormat": "encrypted JSON payload"
+  },
+  "hideFromUsers": [
+    "OpenCode account/login/console",
+    "Direct OpenCode provider/model selection",
+    "9router",
+    "OpenCode upsell/paid prompts"
+  ]
+}
