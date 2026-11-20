@@ -1,5 +1,4 @@
 import { Button } from "@opencode/ui/button"
-import { Checkbox } from "@opencode/ui/checkbox"
 import { TextInput } from "@opencode/ui/text-input"
 import { Schema } from "effect"
 import { Show, createEffect, createMemo, on, onCleanup, onMount } from "solid-js"
@@ -62,8 +61,6 @@ export function RequiredSetupGate() {
   const [state, setState] = createStore({
     status: "checking" as Status,
     name: "",
-    acceptTerms: false,
-    acceptPrivacy: false,
     saving: false,
     error: "",
     initialized: false,
@@ -132,17 +129,10 @@ export function RequiredSetupGate() {
         return
       }
 
-      const acceptedCurrent =
-        imported?.termsVersion === TERMS_VERSION &&
-        imported?.privacyVersion === PRIVACY_VERSION &&
-        !!imported?.acceptedAt
-
       setState({
         status: "required",
         initialized: true,
         name: imported?.userName ?? fallback?.userName ?? "",
-        acceptTerms: !!acceptedCurrent,
-        acceptPrivacy: !!acceptedCurrent,
         saving: false,
         error: "",
       })
@@ -154,15 +144,10 @@ export function RequiredSetupGate() {
       return
     }
 
-    const acceptedCurrent =
-      fallback?.termsVersion === TERMS_VERSION && fallback?.privacyVersion === PRIVACY_VERSION && !!fallback?.acceptedAt
-
     setState({
       status: "required",
       initialized: true,
       name: fallback?.userName ?? "",
-      acceptTerms: !!acceptedCurrent,
-      acceptPrivacy: !!acceptedCurrent,
       saving: false,
       error: "",
     })
@@ -190,18 +175,13 @@ export function RequiredSetupGate() {
 
   const canSubmit = createMemo(() => {
     if (state.saving) return false
-    if (!state.name.trim()) return false
-    return state.acceptTerms && state.acceptPrivacy
+    return !!state.name.trim()
   })
 
   const submit = async () => {
     const name = state.name.trim()
     if (!name) {
       setState({ error: "Vui lòng nhập tên người dùng." })
-      return
-    }
-    if (!state.acceptTerms || !state.acceptPrivacy) {
-      setState({ error: "Bạn cần xác nhận đồng ý Điều khoản sử dụng và Chính sách quyền riêng tư để tiếp tục." })
       return
     }
     setState({ saving: true, error: "" })
@@ -222,10 +202,9 @@ export function RequiredSetupGate() {
       >
         <div class="w-full max-w-3xl rounded-xl border border-border-weak-base bg-background-stronger shadow-lg flex flex-col max-h-full">
           <div class="p-5 sm:p-6 border-b border-border-weak-base">
-            <h1 class="text-16-medium text-text-strong">Thiết lập bắt buộc — {APP_NAME}</h1>
+            <h1 class="text-16-medium text-text-strong">Thiết lập — {APP_NAME}</h1>
             <p class="mt-2 text-13-regular text-text-weak">
-              Vui lòng nhập tên người dùng và xác nhận đồng ý Điều khoản sử dụng và Chính sách quyền riêng tư trước khi
-              sử dụng ứng dụng.
+              Vui lòng nhập tên người dùng để bắt đầu sử dụng ứng dụng.
             </p>
             <Show when={state.status === "checking"}>
               <p class="mt-3 text-12-regular text-text-weaker">Đang kiểm tra hồ sơ thiết lập…</p>
@@ -249,7 +228,9 @@ export function RequiredSetupGate() {
                   disabled={state.saving}
                 />
                 <p class="text-12-regular text-text-weaker">
-                  Tên được lưu trên thiết bị (ưu tiên lưu trữ bảo mật trên desktop) để hiển thị trong phiên bản.
+                  Tên được lưu trên thiết bị (ưu tiên lưu trữ bảo mật trên desktop) để hiển thị trong phiên bản. Bằng
+                  việc nhấn &quot;Xác nhận và tiếp tục&quot;, bạn đồng ý với Điều khoản sử dụng và Chính sách quyền
+                  riêng tư bên dưới.
                 </p>
               </div>
 
@@ -259,14 +240,6 @@ export function RequiredSetupGate() {
                   <div class="rounded-md border border-border-weak-base bg-background-base p-3 max-h-48 overflow-auto">
                     <pre class="whitespace-pre-wrap text-12-regular text-text-weak font-sans">{TERMS_OF_USE_VI}</pre>
                   </div>
-                  <label class="flex items-start gap-2 text-13-regular text-text-base cursor-pointer">
-                    <Checkbox
-                      checked={state.acceptTerms}
-                      disabled={state.saving}
-                      onChange={(checked: boolean) => setState({ acceptTerms: checked === true, error: "" })}
-                    />
-                    <span>Tôi đã đọc và đồng ý với Điều khoản sử dụng.</span>
-                  </label>
                 </div>
 
                 <div class="flex flex-col gap-2">
@@ -274,14 +247,6 @@ export function RequiredSetupGate() {
                   <div class="rounded-md border border-border-weak-base bg-background-base p-3 max-h-48 overflow-auto">
                     <pre class="whitespace-pre-wrap text-12-regular text-text-weak font-sans">{PRIVACY_POLICY_VI}</pre>
                   </div>
-                  <label class="flex items-start gap-2 text-13-regular text-text-base cursor-pointer">
-                    <Checkbox
-                      checked={state.acceptPrivacy}
-                      disabled={state.saving}
-                      onChange={(checked: boolean) => setState({ acceptPrivacy: checked === true, error: "" })}
-                    />
-                    <span>Tôi đã đọc và đồng ý với Chính sách quyền riêng tư.</span>
-                  </label>
                 </div>
               </div>
 
