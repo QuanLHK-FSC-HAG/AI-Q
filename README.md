@@ -23,6 +23,8 @@
 ![Router](https://img.shields.io/badge/ROUTER-AIQ%2FAUTO-16A34A?style=for-the-badge)
 ![Access](https://img.shields.io/badge/AI_ACCOUNT-NOT_REQUIRED-EA580C?style=for-the-badge)
 
+> **Tải AI-Q cho Windows (1 file):** [**AI-Q-Setup-win-x64.exe**](https://github.com/QuanLHK-FSC-HAG/AI-Q/releases/download/desktop-0.0.0-prod-202611180254/AI-Q-Setup-win-x64.exe) — *cần Internet khi cài (tự tải AI-Q CLI)* · [Chi tiết & khắc phục](document/CAI_DAT_VA_CLI.md)
+
 ```text
 > SYSTEM INITIALIZATION...
 
@@ -65,9 +67,7 @@ AI RESPONSE
 
 **Tải bộ cài Windows (1 file)**
 
-- Tải `AI-Q-Setup-win-x64.exe` từ [Releases](https://github.com/QuanLHK-FSC-HAG/AI-Q/releases).
-- **Cần Internet khi cài đặt:** bộ cài tự tải AI-Q CLI từ GitHub Release trong lúc cài. Nếu không có mạng, cài đặt sẽ dừng (có thể Thử lại/Hủy).
-- Xem chi tiết và cách khắc phục/thủ công: [Cài đặt & CLI](document/CAI_DAT_VA_CLI.md).
+- **[⬇ Tải AI-Q-Setup-win-x64.exe](https://github.com/QuanLHK-FSC-HAG/AI-Q/releases/download/desktop-0.0.0-prod-202611180254/AI-Q-Setup-win-x64.exe)** (cần Internet khi cài — bộ cài tự tải AI-Q CLI). [Tất cả bản phát hành](https://github.com/QuanLHK-FSC-HAG/AI-Q/releases) · [Chi tiết & khắc phục](document/CAI_DAT_VA_CLI.md)
 
 **Build từ mã nguồn**
 
