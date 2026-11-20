@@ -18,7 +18,7 @@ Khi bạn gửi yêu cầu trong Ứng dụng, các dữ liệu sau có thể đ
 ## 2. Chia sẻ dữ liệu với nhà cung cấp/model
 - Để xử lý yêu cầu, nội dung và dữ liệu kỹ thuật cần thiết có thể được truyền tới hạ tầng/model/nhà cung cấp phục vụ model được chọn tại thời điểm đó.
 - Chính sách lưu trữ, sử dụng cho mục đích huấn luyện/cải thiện, và chia sẻ tiếp theo (nếu có) **phụ thuộc vào nhà cung cấp/model**. Ứng dụng định hướng hạn chế chia sẻ ngoài mục đích xử lý yêu cầu theo khả năng và cấu hình; tuy nhiên bạn nên cân nhắc khi gửi dữ liệu.
-- Ứng dụng không yêu cầu tài khoản OpenCode cho luồng sử dụng mặc định `aiq/auto` (theo thiết kế hiện tại).
+- Ứng dụng không yêu cầu tài khoản cho luồng sử dụng mặc định `aiq/auto` (theo thiết kế hiện tại).
 
 ## 3. Dữ liệu lưu trữ cục bộ trên thiết bị
 Ứng dụng có thể lưu cục bộ trên PC của bạn (tùy phiên bản/cấu hình), ví dụ:
