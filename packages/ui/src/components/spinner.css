@@ -1,0 +1,53 @@
+/* 3-color waiting spinner (blue/orange/green). Sized by props/CSS; thickness scales with size. */
+[data-slot="spinner-dots"] {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--spinner-width, 1em);
+  height: var(--spinner-height, var(--spinner-width, 1em));
+  aspect-ratio: 1;
+  flex-shrink: 0;
+  color: inherit;
+}
+
+[data-slot="spinner-dots"] .AIQ-spinner-ring {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 10deg,
+    #1677e8 0 102deg,
+    transparent 102deg 120deg,
+    #ff7a1a 120deg 222deg,
+    transparent 222deg 240deg,
+    #1db954 240deg 342deg,
+    transparent 342deg 360deg
+  );
+  -webkit-mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - clamp(2px, 12.5%, 13px)),
+    #000 calc(100% - clamp(2px, 12.5%, 13px) + 1px)
+  );
+  mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - clamp(2px, 12.5%, 13px)),
+    #000 calc(100% - clamp(2px, 12.5%, 13px) + 1px)
+  );
+  animation: AIQ-spin 1s linear infinite;
+  box-sizing: border-box;
+}
+
+@keyframes AIQ-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+[data-slot="spinner-dots"][data-offscreen] .AIQ-spinner-ring {
+  animation-play-state: paused !important;
+}
+
+:root[data-motion="reduce"] [data-slot="spinner-dots"] .AIQ-spinner-ring {
+  animation: none !important;
+}
