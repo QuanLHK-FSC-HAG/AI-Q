@@ -20,8 +20,6 @@ export const clientSettings: Entry<SettingsRootTab>[] = [
   { tab: "appearance", label: "settings.general.section.appearance" },
   { tab: "notifications", label: "settings.tab.notifications" },
   { tab: "shortcuts", label: "settings.shortcuts.title", keywords: "keybind keyboard hotkey" },
-  { tab: "mix", label: "settings.mix.title", keywords: "mix router blend quota keys balance pool token" },
-  { tab: "mix", label: "settings.mix.hideReal.title", target: "settings-mix-hide-real", keywords: "hide real models provider" },
   { tab: "about", label: "settings.tab.about", keywords: "version license credits" },
   { tab: "experimental", label: "settings.tab.experimental", keywords: "experiments preview beta" },
   { tab: "general", label: "settings.general.row.language.title", target: "settings-language" },
@@ -251,6 +249,8 @@ export const serverSettings: Entry<SettingsServerTab | "servers">[] = [
   { tab: "workspaces", label: "settings.tab.workspaces", keywords: "workspaces disk usage cleanup delete" },
   { tab: "providers", label: "settings.providers.title", keywords: "connect api key credentials" },
   { tab: "models", label: "settings.models.title", keywords: "model picker visibility" },
+  { tab: "mix", label: "settings.mix.title", keywords: "mix router blend quota keys balance pool token" },
+  { tab: "mix", label: "settings.mix.hideReal.title", target: "settings-mix-hide-real", keywords: "hide real models provider" },
   { tab: "extensions", label: "settings.tab.extensions" },
   {
     tab: "extensions",

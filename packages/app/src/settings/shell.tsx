@@ -42,12 +42,12 @@ const rootClientTabs = [
   { value: "appearance", icon: pageIcons.appearance, label: "settings.general.section.appearance" },
   { value: "notifications", icon: pageIcons.notifications, label: "settings.tab.notifications" },
   { value: "shortcuts", icon: pageIcons.shortcuts, label: "settings.tab.shortcuts" },
-  { value: "mix", icon: pageIcons.mix, label: "settings.mix.title" },
 ] as const
 
 const serverTabs = [
   { value: "providers", icon: pageIcons.providers, label: "settings.providers.title" },
   { value: "models", icon: pageIcons.models, label: "settings.models.title" },
+  { value: "mix", icon: pageIcons.mix, label: "settings.mix.title" },
   { value: "extensions", icon: pageIcons.extensions, label: "settings.tab.extensions" },
   { value: "projects", icon: pageIcons.projects, label: "settings.tab.projects" },
   { value: "workspaces", icon: pageIcons.workspaces, label: "settings.tab.workspaces" },
@@ -57,6 +57,7 @@ const serverTabs = [
 const serverPages = {
   providers: { title: "settings.providers.title", description: "settings.providers.description" },
   models: { title: "settings.models.title", description: "settings.models.description" },
+  mix: { title: "settings.mix.title", description: "settings.mix.description" },
   extensions: { title: "settings.tab.extensions", description: "settings.extensions.description" },
   projects: { title: "settings.projects.title", description: "settings.projects.description" },
   workspaces: { title: "settings.tab.workspaces", description: "settings.workspaces.description" },
@@ -261,9 +262,6 @@ function RootSettings() {
       <Tabs.Content value="shortcuts" class="settings-panel">
         <SettingsKeybinds active={surface.view().tab === "shortcuts"} />
       </Tabs.Content>
-      <Tabs.Content value="mix" class="settings-panel">
-        <SettingsMix />
-      </Tabs.Content>
       <PluginSettingsPages />
       <Tabs.Content value="experimental" class="settings-panel">
         <SettingsExperimental />
@@ -314,6 +312,9 @@ function RootSettings() {
                 headerAction={<SettingsServerSwitcher />}
                 onConsumeTarget={() => setState("modelProvider", undefined)}
               />
+            </Tabs.Content>
+            <Tabs.Content value="mix" class="settings-panel">
+              <SettingsMix />
             </Tabs.Content>
             <Tabs.Content value="extensions" class="settings-panel">
               <SettingsExtensions
