@@ -14,7 +14,7 @@ export type LocationServices = Layer.Success<ReturnType<(typeof LocationServiceM
 
 export class LocationMiddleware extends HttpApiMiddleware.Service<LocationMiddleware, { provides: LocationServices }>()(
   "@opencode/HttpApiLocation",
-  { error: [LocationNotFoundError] },
+  { error: [LocationNotFoundError, ServiceUnavailableError] },
 ) {}
 
 export function locationErrors<A, E, R>(effect: Effect.Effect<A, E, R>) {
@@ -96,7 +96,18 @@ export const layer = Layer.effect(
     return LocationMiddleware.of((effect) =>
       Effect.gen(function* () {
         const request = yield* HttpServerRequest.HttpServerRequest
-        return yield* effect.pipe(Effect.provide(locations.get(requestRef(request))), locationErrors)
+        return yield* effect.pipe(
+          Effect.provide(locations.get(requestRef(request))),
+          locationErrors,
+          Effect.catchDefect((defect) =>
+            Effect.fail(
+              new ServiceUnavailableError({
+                message: defect instanceof Error ? defect.message : String(defect),
+                service: "location",
+              }),
+            ),
+          ),
+        )
       }),
     )
   }),

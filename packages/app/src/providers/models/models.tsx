@@ -55,16 +55,26 @@ const createModelsController = (directory: Accessor<string | undefined>) => {
   const store = models.store
   const setStore = models.set
 
-  const available = createMemo(() =>
-    providers.connected().flatMap((p) => {
-      // Show only AI-Q combo models in picker; auto-combo rotates across all queryable real models in core.
-      if (p.id !== "aiq") return []
-      return Object.values(p.models).map((m) => ({
+  const available = createMemo(() => {
+    const connected = providers.connected()
+    const aiq = connected
+      .filter((p) => p.id === "aiq")
+      .flatMap((p) =>
+        Object.values(p.models).map((m) => ({
+          ...m,
+          provider: p,
+        })),
+      )
+    if (aiq.length > 0) return aiq
+    // Fallback: if AI-Q provider is unavailable in catalog (sync/version issue), show all connected models
+    // so the picker is not empty while chat may still work.
+    return connected.flatMap((p) =>
+      Object.values(p.models).map((m) => ({
         ...m,
         provider: p,
-      }))
-    }),
-  )
+      })),
+    )
+  })
 
   // Release dates as epoch ms; an unparseable date is NaN and never counts as recent.
   const release = createMemo(

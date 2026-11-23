@@ -194,8 +194,10 @@ const getBase = (appId: string): Configuration => {
     },
     nsis: {
       include: path.join(packageDir, "resources", "windows", "installer.nsh"),
-      oneClick: true,
+      oneClick: false,
+      allowToChangeInstallationDirectory: true,
       perMachine: false,
+      allowElevation: true,
       installerIcon: `resources/icons/icon.ico`,
       installerHeaderIcon: `resources/icons/icon.ico`,
     },

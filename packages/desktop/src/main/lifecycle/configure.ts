@@ -44,12 +44,22 @@ export function configureApplication() {
     app.commandLine.appendSwitch("enable-precise-memory-info")
 
   const testRoot = createTestRoot()
-  app.setPath("userData", testRoot ? path.join(testRoot, "desktop") : path.join(app.getPath("appData"), APP_ID))
+  const userData = testRoot ? path.join(testRoot, "desktop") : path.join(app.getPath("appData"), APP_ID)
+  app.setPath("userData", userData)
 
   if (testRoot) {
     app.setPath("sessionData", path.join(testRoot, "session"))
 
     if (testOnboarding) app.setPath("documents", path.join(testRoot, "documents"))
+  } else {
+    // Isolate AI-Q data/config/cache/state from existing OpenCode installs.
+    // Keep OPENCODE_* env var names (technical contract) but point them at AI-Q-owned dirs.
+    const xdg = path.join(userData, "xdg")
+    for (const dir of ["data", "config", "cache", "state"]) mkdirSync(path.join(xdg, dir), { recursive: true })
+    process.env.XDG_DATA_HOME = path.join(xdg, "data")
+    process.env.XDG_CONFIG_HOME = path.join(xdg, "config")
+    process.env.XDG_CACHE_HOME = path.join(xdg, "cache")
+    process.env.XDG_STATE_HOME = path.join(xdg, "state")
   }
 
   // V8 bytecode for the main bundle survives between launches, like the renderer's code cache.

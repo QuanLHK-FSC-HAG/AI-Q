@@ -25,7 +25,12 @@ const layer = (ref: Ref) =>
       const project = yield* Project.Service
       // Location.node builds alongside FileSystem.node, so avoid creating or unarchiving
       // a Project row for a local path that FileSystem.node is about to reject.
-      const persist = ref.workspaceID !== undefined || (yield* fs.isDir(ref.directory))
+      let exists = ref.workspaceID !== undefined || (yield* fs.isDir(ref.directory))
+      if (!exists && ref.workspaceID === undefined) {
+        yield* fs.ensureDir(ref.directory).pipe(Effect.ignore)
+        exists = yield* fs.isDir(ref.directory)
+      }
+      const persist = exists
       const resolved = yield* project.resolve(ref.directory, { persist })
       return Service.of({
         directory: ref.directory,

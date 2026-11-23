@@ -74,13 +74,10 @@ export function useProviders(directory: Accessor<string | undefined>) {
     },
     connected: () => {
       const connected = new Set(providers().connected)
-
-      return pipe(
-        providers().all,
-        Iterable.map(([, p]) => p),
-        Iterable.filter((p) => connected.has(p.id) && p.id === "aiq"),
-        (v) => Array.from(v),
-      )
+      const all = Array.from(providers().all.values()).filter((p) => connected.has(p.id))
+      const aiq = all.filter((p) => p.id === "aiq")
+      // Prefer AI-Q models; fallback to all connected providers if AI-Q catalog is missing.
+      return aiq.length > 0 ? aiq : all
     },
     // Any stored or detected connection, or a provider with models (including AI-Q auto-combo).
     // Undefined until both catalogs load, so callers never mistake loading for a first run.
