@@ -368,6 +368,21 @@
 !macro customUnInstall
   ${IfNot} ${isUpdated}
     !insertmacro removeStagedUpdates $INSTDIR
+    MessageBox MB_ICONQUESTION|MB_YESNOCANCEL|MB_DEFBUTTON2 "Chon kieu go cai dat AI-Q:$\r$\n$\r$\nCo = Go hoan toan (xoa ca du lieu, cai dat, phien lam viec, tai khoan da dang nhap tren may)$\r$\nKhong = Chi go ung dung (giu du lieu de cai lai sau)$\r$\nHuy = Khong go cai dat" IDYES aiq_uninstall_full IDNO aiq_uninstall_keep
+      Abort
+    aiq_uninstall_full:
+      RMDir /r "$APPDATA\${APP_ID}"
+      RMDir /r "$APPDATA\${PRODUCT_FILENAME}"
+      RMDir /r "$LOCALAPPDATA\${APP_ID}"
+      RMDir /r "$LOCALAPPDATA\${APP_FILENAME}"
+      RMDir /r "$LOCALAPPDATA\${PRODUCT_FILENAME}"
+      RMDir /r "$LOCALAPPDATA\${PRODUCT_FILENAME}-updater"
+      DeleteRegKey HKCU "Software\${APP_ID}"
+      ${If} "${APP_ID}" == "com.quanlhk.AIQ.desktop"
+        DeleteRegKey HKCU "Software\com.quanlhk.AIQ.desktop"
+        DeleteRegKey HKCU "Software\AI-Q"
+      ${EndIf}
+    aiq_uninstall_keep:
   ${EndIf}
 !macroend
 

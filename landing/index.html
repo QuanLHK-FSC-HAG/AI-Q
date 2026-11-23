@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI-Q | Trợ lý lập trình AI cho Windows</title>
+  <meta name="description" content="AI-Q là trợ lý lập trình AI cho Windows. Cài 1 file, dùng aiq/auto, không cần tài khoản AI, hỗ trợ tiếng Việt.">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="icon" href="./icon.png" type="image/png">
+  <style>
+    :root {
+      --bg: #0b1020;
+      --bg2: #121a33;
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.04);
+      --text: #edf2ff;
+      --muted: #aab6d6;
+      --line: rgba(255,255,255,.12);
+      --brand: #5b8cff;
+      --brand2: #7c5cff;
+      --ok: #34d399;
+      --shadow: 0 20px 60px rgba(0,0,0,.35);
+      --radius: 20px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(91,140,255,.28), transparent 60%),
+        radial-gradient(900px 500px at 90% 0%, rgba(124,92,255,.22), transparent 55%),
+        linear-gradient(180deg, #0b1020 0%, #090e1b 100%);
+      line-height: 1.55;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+    .nav {
+      position: sticky; top: 0; z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(11,16,32,.65);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 0; gap: 16px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; letter-spacing: .2px; }
+    .brand img { width: 36px; height: 36px; border-radius: 10px; box-shadow: 0 6px 20px rgba(91,140,255,.35); }
+    .brand span { font-size: 1.15rem; }
+    .nav-links { display: flex; gap: 18px; align-items: center; color: var(--muted); font-size: .95rem; }
+    .nav-links a:hover { color: var(--text); }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 13px 20px; border-radius: 14px; font-weight: 650; font-size: .96rem;
+      transition: transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease;
+      border: 1px solid transparent; cursor: pointer; white-space: nowrap;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn:active { transform: translateY(0); }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      color: white; box-shadow: 0 12px 30px rgba(91,140,255,.35);
+    }
+    .btn-primary:hover { box-shadow: 0 16px 36px rgba(91,140,255,.45); }
+    .btn-ghost {
+      background: rgba(255,255,255,.04); border-color: var(--line); color: var(--text);
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.2); }
+    .hero { padding: 72px 0 40px; }
+    .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 34px; align-items: center; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 14px; border-radius: 999px; font-size: .84rem; font-weight: 600;
+      color: #cdd9ff; background: rgba(91,140,255,.12); border: 1px solid rgba(91,140,255,.25);
+      margin-bottom: 20px;
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 4px rgba(52,211,153,.15); }
+    h1 {
+      margin: 0 0 18px; font-size: clamp(2.2rem, 5vw, 3.8rem); line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+    .grad { background: linear-gradient(135deg, #fff 30%, #9db7ff 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .lead { margin: 0 0 28px; font-size: 1.08rem; color: var(--muted); max-width: 62ch; }
+    .actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 18px; }
+    .meta { display: flex; gap: 18px; flex-wrap: wrap; color: var(--muted); font-size: .9rem; }
+    .meta span { display: inline-flex; align-items: center; gap: 8px; }
+    .meta svg { width: 16px; height: 16px; color: var(--ok); flex: 0 0 auto; }
+    .panel {
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      border: 1px solid var(--line); border-radius: 24px; padding: 24px;
+      box-shadow: var(--shadow); position: relative; overflow: hidden;
+    }
+    .panel::before {
+      content: ""; position: absolute; inset: -1px; border-radius: 24px; padding: 1px;
+      background: linear-gradient(135deg, rgba(91,140,255,.4), transparent 40%, rgba(124,92,255,.3));
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
+    }
+    .terminal {
+      background: #0a0f1f; border: 1px solid rgba(255,255,255,.08); border-radius: 16px;
+      overflow: hidden; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+    .term-top { display: flex; gap: 8px; padding: 12px 14px; background: rgba(255,255,255,.03); border-bottom: 1px solid rgba(255,255,255,.06); }
+    .term-top i { width: 10px; height: 10px; border-radius: 50%; display: block; }
+    .term-top i:nth-child(1){background:#ff5f57}.term-top i:nth-child(2){background:#febc2e}.term-top i:nth-child(3){background:#28c840}
+    .term-body { padding: 18px; font-size: .88rem; color: #c9d5f0; min-height: 260px; }
+    .term-body .line { margin: 0 0 8px; white-space: pre-wrap; word-break: break-word; }
+    .k { color: #7aa2ff; } .v { color: #34d399; } .m { color: #aab6d6; } .p { color: #f0abfc; }
+    section { padding: 56px 0; }
+    .section-title { font-size: clamp(1.6rem, 3vw, 2.3rem); margin: 0 0 12px; letter-spacing: -.02em; }
+    .section-lead { color: var(--muted); margin: 0 0 28px; max-width: 68ch; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card {
+      background: var(--card2); border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 24px; transition: border-color .15s ease, background .15s ease;
+    }
+    .card:hover { background: var(--card); border-color: rgba(91,140,255,.35); }
+    .icon {
+      width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center;
+      background: rgba(91,140,255,.14); color: #9db7ff; margin-bottom: 14px;
+    }
+    .icon svg { width: 22px; height: 22px; }
+    .card h3 { margin: 0 0 8px; font-size: 1.05rem; }
+    .card p { margin: 0; color: var(--muted); font-size: .95rem; }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .step { padding: 24px; border-radius: var(--radius); border: 1px solid var(--line); background: rgba(255,255,255,.03); }
+    .num {
+      width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center;
+      font-weight: 700; font-size: .9rem; color: white;
+      background: linear-gradient(135deg, var(--brand), var(--brand2)); margin-bottom: 14px;
+    }
+    .step h3 { margin: 0 0 8px; font-size: 1.03rem; }
+    .step p { margin: 0; color: var(--muted); font-size: .94rem; }
+    .cta {
+      padding: 36px; border-radius: 28px; border: 1px solid rgba(91,140,255,.25);
+      background: linear-gradient(135deg, rgba(91,140,255,.16), rgba(124,92,255,.1));
+      display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+    }
+    .cta h2 { margin: 0 0 8px; font-size: clamp(1.5rem, 2.5vw, 2rem); letter-spacing: -.02em; }
+    .cta p { margin: 0; color: var(--muted); }
+    footer { padding: 40px 0 56px; color: var(--muted); font-size: .92rem; }
+    .foot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,.08); padding-top: 24px; }
+    .foot a { color: #cdd9ff; }
+    .foot a:hover { color: white; }
+    @media (max-width: 940px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .grid, .steps { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .nav-links .hide-mobile { display: none; }
+      .hero { padding-top: 52px; }
+      .btn { width: 100%; }
+      .actions { flex-direction: column; }
+      .cta { padding: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top" aria-label="AI-Q">
+        <img src="./icon.png" alt="AI-Q logo" width="36" height="36">
+        <span>AI-Q</span>
+      </a>
+      <div class="nav-links">
+        <a class="hide-mobile" href="#features">Tính năng</a>
+        <a class="hide-mobile" href="#install">Cài đặt</a>
+        <a class="hide-mobile" href="https://github.com/QuanLHK-FSC-HAG/AI-Q" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a class="btn btn-primary" href="https://github.com/QuanLHK-FSC-HAG/AI-Q/releases/download/desktop-0.0.0-prod-202611180254/AI-Q-Setup-win-x64.exe">Tải cho Windows</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow"><span class="dot"></span>Windows Desktop · AI-Q/Auto</div>
+          <h1><span class="grad">Trợ lý lập trình AI</span><br>cho Windows</h1>
+          <p class="lead">AI-Q giúp bạn code nhanh hơn với model mặc định <strong>aiq/auto</strong>, không cần tài khoản AI, hỗ trợ tiếng Việt và cài đặt chỉ bằng 1 file.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="https://github.com/QuanLHK-FSC-HAG/AI-Q/releases/download/desktop-0.0.0-prod-202611180254/AI-Q-Setup-win-x64.exe">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Tải AI-Q-Setup-win-x64.exe
+            </a>
+            <a class="btn btn-ghost" href="https://github.com/QuanLHK-FSC-HAG/AI-Q" target="_blank" rel="noopener noreferrer">Xem trên GitHub</a>
+          </div>
+          <div class="meta">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>1 file cài đặt</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Không cần tài khoản AI</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Hỗ trợ tiếng Việt</span>
+          </div>
+        </div>
+        <div class="panel" aria-label="Xem trước AI-Q">
+          <div class="terminal">
+            <div class="term-top"><i></i><i></i><i></i></div>
+            <div class="term-body">
+              <p class="line"><span class="m">&gt; SYSTEM INITIALIZATION...</span></p>
+              <p class="line"><span class="k">[01]</span> Loading AI-Q Core .......... <span class="v">OK</span></p>
+              <p class="line"><span class="k">[02]</span> Initializing Model Router .. <span class="v">OK</span></p>
+              <p class="line"><span class="k">[03]</span> Default Model .............. <span class="p">aiq/auto</span></p>
+              <p class="line"><span class="k">[04]</span> AI Account ................. <span class="v">NOT REQUIRED</span></p>
+              <p class="line"><span class="k">[05]</span> Interface .................. <span class="v">VIETNAMESE</span></p>
+              <p class="line"><span class="k">[06]</span> Platform ................... <span class="v">WINDOWS</span></p>
+              <p class="line"></p>
+              <p class="line"><span class="m">&gt; READY TO CODE_</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="wrap">
+        <h2 class="section-title">Tính năng chính</h2>
+        <p class="section-lead">Tập trung vào trải nghiệm đơn giản cho người dùng Windows: cài nhanh, dùng ngay, tự chọn model phù hợp.</p>
+        <div class="grid">
+          <article class="card">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+            <h3>aiq/auto mặc định</h3>
+            <p>Tự động định tuyến đến model khả dụng, giảm thời gian cấu hình và giúp bạn bắt đầu làm việc ngay.</p>
+          </article>
+          <article class="card">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+            <h3>Không cần tài khoản AI</h3>
+            <p>Trải nghiệm khởi động gọn nhẹ, không cần tạo tài khoản AI riêng để bắt đầu sử dụng.</p>
+          </article>
+          <article class="card">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+            <h3>1 file cài đặt</h3>
+            <p>Tải một file `.exe`, chạy cài đặt trên Windows. Bộ cài tự tải CLI cần thiết khi có Internet.</p>
+          </article>
+          <article class="card">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+            <h3>Hỗ trợ tiếng Việt</h3>
+            <p>Giao diện và trải nghiệm hướng tới người dùng Việt Nam, dễ tiếp cận và dễ sử dụng.</p>
+          </article>
+          <article class="card">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></div>
+            <h3>Cập nhật model/mix</h3>
+            <p>Cập nhật model/mix ngay trong ứng dụng bằng một nút bấm, không cần cài lại toàn bộ app.</p>
+          </article>
+          <article class="card">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <h3>Tách biệt dữ liệu</h3>
+            <p>Dữ liệu AI-Q được cô lập khỏi OpenCode để tránh xung đột khi máy đã cài cả hai ứng dụng.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="install">
+      <div class="wrap">
+        <h2 class="section-title">Cài đặt trong 3 bước</h2>
+        <p class="section-lead">Bạn có thể bắt đầu sử dụng AI-Q trên Windows chỉ trong vài phút.</p>
+        <div class="steps">
+          <div class="step">
+            <div class="num">1</div>
+            <h3>Tải bộ cài</h3>
+            <p>Tải <strong>AI-Q-Setup-win-x64.exe</strong> từ GitHub Releases hoặc nút tải trên trang này.</p>
+          </div>
+          <div class="step">
+            <div class="num">2</div>
+            <h3>Cài đặt</h3>
+            <p>Chạy file cài đặt, chọn thư mục cài và nhập tên người dùng. Cần Internet để tải CLI khi cài.</p>
+          </div>
+          <div class="step">
+            <div class="num">3</div>
+            <h3>Bắt đầu dùng</h3>
+            <p>Mở AI-Q, dùng <strong>aiq/auto</strong> làm model mặc định và bắt đầu trò chuyện/lập trình ngay.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="cta">
+          <div>
+            <h2>Sẵn sàng dùng AI-Q trên Windows?</h2>
+            <p>Tải bản cài đặt mới nhất và trải nghiệm trợ lý lập trình AI với aiq/auto.</p>
+          </div>
+          <div class="actions" style="margin:0">
+            <a class="btn btn-primary" href="https://github.com/QuanLHK-FSC-HAG/AI-Q/releases/download/desktop-0.0.0-prod-202611180254/AI-Q-Setup-win-x64.exe">Tải cho Windows</a>
+            <a class="btn btn-ghost" href="https://github.com/QuanLHK-FSC-HAG/AI-Q/releases" target="_blank" rel="noopener noreferrer">Tất cả bản phát hành</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap foot">
+      <div>© 2026 QuanLHK · AI-Q. Designed by QuanLHK with AI.</div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;">
+        <a href="https://github.com/QuanLHK-FSC-HAG/AI-Q" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://github.com/QuanLHK-FSC-HAG/AI-Q/releases" target="_blank" rel="noopener noreferrer">Releases</a>
+        <a href="https://q-ai-six.vercel.app" target="_blank" rel="noopener noreferrer">q-ai-six.vercel.app</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
