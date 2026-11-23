@@ -200,6 +200,7 @@ const getBase = (appId: string): Configuration => {
       allowElevation: true,
       installerIcon: `resources/icons/icon.ico`,
       installerHeaderIcon: `resources/icons/icon.ico`,
+      uninstallDisplayName: "AI-Q",
     },
     linux: {
       icon: `resources/icons`,
