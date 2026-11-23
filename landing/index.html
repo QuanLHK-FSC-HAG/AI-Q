@@ -1,153 +1,195 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="vi">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AI-Q | Trợ lý lập trình AI cho Windows</title>
-  <meta name="description" content="AI-Q là trợ lý lập trình AI cho Windows. Cài 1 file, dùng aiq/auto, không cần tài khoản AI, hỗ trợ tiếng Việt.">
-  <meta name="theme-color" content="#f7f8fa">
+  <title>AI-Q | Vibe Coding ngay trÃªn mÃ¡y tÃ­nh cá»§a báº¡n</title>
+  <meta name="description" content="AI-Q lÃ  cÃ´ng cá»¥ Vibe Coding dÃ¹ng AI Ä‘á»ƒ táº¡o vÃ  phÃ¡t triá»ƒn pháº§n má»m trá»±c tiáº¿p trong thÆ° má»¥c trÃªn mÃ¡y tÃ­nh Windows. MÃ´ táº£ yÃªu cáº§u báº±ng tiáº¿ng Viá»‡t, AI-Q táº¡o vÃ  chá»‰nh sá»­a file ngay trong dá»± Ã¡n.">
+  <meta name="keywords" content="AI-Q, Vibe Coding, láº­p trÃ¬nh AI, AI Coding Agent, táº¡o á»©ng dá»¥ng báº±ng AI, láº­p trÃ¬nh báº±ng tiáº¿ng Viá»‡t">
+  <meta name="robots" content="index,follow">
+  <meta property="og:title" content="AI-Q | Vibe Coding ngay trÃªn mÃ¡y tÃ­nh cá»§a báº¡n">
+  <meta property="og:description" content="Báº¡n cÃ³ Ã½ tÆ°á»Ÿng â€“ AI-Q giÃºp biáº¿n Ã½ tÆ°á»Ÿng thÃ nh sáº£n pháº©m. Táº¡o, Ä‘á»c, chá»‰nh sá»­a file trá»±c tiáº¿p trong folder dá»± Ã¡n trÃªn Windows.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://q-ai-six.vercel.app">
+  <meta name="theme-color" content="#111827">
   <link rel="icon" href="./icon.png" type="image/png">
   <style>
     :root {
-      --bg: #f7f8fa;
-      --surface: #ffffff;
-      --surface-alt: #eef3fb;
-      --text: #18212f;
-      --muted: #5d6b82;
-      --line: #dbe3ee;
-      --blue: #1d63d8;
-      --blue-deep: #154ca8;
-      --orange: #e56f2f;
-      --green: #249454;
-      --radius: 16px;
-      --shadow: 0 1px 2px rgba(24,33,47,.04), 0 8px 24px rgba(24,33,47,.06);
+      --bg: #111827;
+      --bg-soft: #182233;
+      --surface: #1b2638;
+      --surface-2: #22314a;
+      --text: #f3f6fb;
+      --muted: #b7c3d9;
+      --line: #31445f;
+      --blue: #4b86e8;
+      --blue-soft: rgba(75,134,232,.14);
+      --orange: #e57a3a;
+      --orange-soft: rgba(229,122,58,.14);
+      --green: #3aa76d;
+      --green-soft: rgba(58,167,109,.14);
+      --radius: 14px;
+      --max: 1140px;
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
       font-family: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
-      color: var(--text);
       background: var(--bg);
-      line-height: 1.6;
+      color: var(--text);
+      line-height: 1.65;
     }
     a { color: inherit; text-decoration: none; }
-    .wrap { width: min(1100px, calc(100% - 40px)); margin: 0 auto; }
+    img { max-width: 100%; display: block; }
+    .wrap { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
     .nav {
-      position: sticky; top: 0; z-index: 20;
-      background: rgba(247,248,250,.94);
+      position: sticky; top: 0; z-index: 30;
+      background: rgba(17,24,39,.92);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--line);
     }
-    .nav-inner {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 14px 0; gap: 16px;
-    }
-    .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; }
+    .brand { display: flex; align-items: center; gap: 11px; font-weight: 700; }
     .brand img { width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--line); background: #fff; }
-    .brand span { font-size: 1.2rem; letter-spacing: -0.01em; }
-    .nav-links { display: flex; gap: 18px; align-items: center; color: var(--muted); font-size: .95rem; }
+    .brand span { font-size: 1.2rem; letter-spacing: -.01em; }
+    .nav-links { display: flex; gap: 18px; align-items: center; color: var(--muted); font-size: .94rem; }
     .nav-links a:hover { color: var(--text); }
     .btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-      padding: 12px 20px; border-radius: 10px; font-weight: 650; font-size: .95rem;
-      border: 1px solid transparent; transition: background .15s ease, border-color .15s ease, color .15s ease;
-      cursor: pointer; white-space: nowrap;
+      padding: 12px 18px; border-radius: 10px; font-weight: 650; font-size: .94rem;
+      border: 1px solid transparent; cursor: pointer; transition: .15s ease;
+      white-space: nowrap;
     }
     .btn-primary { background: var(--blue); color: #fff; }
-    .btn-primary:hover { background: var(--blue-deep); }
-    .btn-ghost { background: var(--surface); color: var(--text); border-color: var(--line); }
-    .btn-ghost:hover { border-color: #b8c7db; background: #fbfcfe; }
-    .hero { padding: 64px 0 48px; border-bottom: 1px solid var(--line); background: linear-gradient(180deg, #fff 0%, var(--bg) 100%); }
-    .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center; }
-    .tag {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-size: .84rem; font-weight: 650; color: var(--blue-deep);
-      background: #eaf1fd; border: 1px solid #cfe0fb; padding: 7px 12px; border-radius: 999px;
+    .btn-primary:hover { background: #3f78d6; }
+    .btn-ghost { background: transparent; border-color: var(--line); color: var(--text); }
+    .btn-ghost:hover { background: rgba(255,255,255,.04); border-color: #4a6285; }
+    .hero { padding: 72px 0 56px; border-bottom: 1px solid var(--line); background: linear-gradient(180deg, #162033 0%, var(--bg) 100%); }
+    .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 42px; align-items: center; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px; padding: 7px 12px; border-radius: 999px;
+      font-size: .83rem; font-weight: 650; color: #d7e6ff; background: var(--blue-soft); border: 1px solid rgba(75,134,232,.28);
       margin-bottom: 20px;
     }
-    .tag b { color: var(--green); }
-    h1 {
-      margin: 0 0 18px; font-size: clamp(2.2rem, 5vw, 3.5rem); line-height: 1.15;
-      letter-spacing: -0.03em; color: #131b28;
-    }
-    .lead { margin: 0 0 28px; font-size: 1.06rem; color: var(--muted); max-width: 62ch; }
+    .eyebrow i { width: 8px; height: 8px; border-radius: 50%; background: var(--green); display: block; }
+    h1 { margin: 0 0 16px; font-size: clamp(2.2rem, 5vw, 3.7rem); line-height: 1.12; letter-spacing: -.03em; }
+    h1 .name { color: #fff; }
+    h1 .tagline { color: #cfe0ff; display: block; font-size: .52em; line-height: 1.35; margin-top: 14px; font-weight: 650; letter-spacing: -.01em; }
+    .lead { margin: 0 0 28px; color: var(--muted); font-size: 1.05rem; max-width: 62ch; }
     .lead strong { color: var(--text); }
     .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
-    .notes { display: flex; gap: 16px 24px; flex-wrap: wrap; color: var(--muted); font-size: .92rem; }
-    .notes span { display: inline-flex; align-items: center; gap: 8px; }
-    .notes .c-blue { color: var(--blue); }
-    .notes .c-orange { color: var(--orange); }
-    .notes .c-green { color: var(--green); }
-    .panel {
-      background: var(--surface); border: 1px solid var(--line); border-radius: 20px;
-      box-shadow: var(--shadow); overflow: hidden;
+    .checks { display: flex; flex-wrap: wrap; gap: 14px 22px; color: var(--muted); font-size: .92rem; }
+    .checks span { display: inline-flex; align-items: center; gap: 8px; }
+    .checks svg { width: 16px; height: 16px; flex: 0 0 auto; }
+    .c-blue { color: var(--blue); } .c-orange { color: var(--orange); } .c-green { color: var(--green); }
+    .mock {
+      background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden;
     }
-    .panel-head {
-      padding: 14px 18px; border-bottom: 1px solid var(--line);
+    .mock-head {
+      padding: 13px 16px; border-bottom: 1px solid var(--line); background: #202d42;
       display: flex; align-items: center; justify-content: space-between; gap: 12px;
-      background: #fbfcfe;
     }
-    .panel-head .dots { display: flex; gap: 7px; }
-    .panel-head .dots i { width: 10px; height: 10px; border-radius: 50%; display: block; }
-    .panel-head .dots i:nth-child(1){background:var(--orange)}
-    .panel-head .dots i:nth-child(2){background:#e0b15a}
-    .panel-head .dots i:nth-child(3){background:var(--green)}
-    .panel-head span { font-size: .82rem; color: var(--muted); font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
-    .terminal {
-      padding: 22px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: .88rem; line-height: 1.8; color: #334155; background: #fff;
+    .dots { display: flex; gap: 7px; }
+    .dots i { width: 10px; height: 10px; border-radius: 50%; display: block; }
+    .dots i:nth-child(1){background:var(--orange)} .dots i:nth-child(2){background:#d2aa52} .dots i:nth-child(3){background:var(--green)}
+    .mock-head span { color: var(--muted); font-size: .8rem; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    .mock-body { display: grid; grid-template-columns: 180px 1fr; min-height: 320px; }
+    .tree { padding: 18px; border-right: 1px solid var(--line); background: #182436; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .82rem; color: #c6d4e8; }
+    .tree p { margin: 0 0 6px; }
+    .tree .dir { color: #8fb2ef; }
+    .tree .file { color: #dbe6f5; padding-left: 14px; }
+    .term { padding: 18px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .84rem; }
+    .term p { margin: 0 0 8px; color: #cfdaea; }
+    .term .prompt { color: var(--green); }
+    .term .cmd { color: #fff; }
+    .term .ai { color: #9fc0ff; }
+    .term .out { color: var(--muted); }
+    section { padding: 72px 0; }
+    .section-kicker { font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 12px; }
+    .section-kicker.blue { color: var(--blue); } .section-kicker.orange { color: var(--orange); } .section-kicker.green { color: var(--green); }
+    h2 { margin: 0 0 14px; font-size: clamp(1.8rem, 3.4vw, 2.7rem); line-height: 1.2; letter-spacing: -.02em; }
+    .section-lead { margin: 0 0 34px; color: var(--muted); max-width: 70ch; font-size: 1rem; }
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; }
+    .box {
+      background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px;
     }
-    .terminal p { margin: 0; }
-    .k { color: var(--blue); font-weight: 600; } .v { color: var(--green); font-weight: 600; }
-    .p { color: var(--orange); font-weight: 600; } .m { color: #64748b; }
-    section { padding: 64px 0; }
-    .section-title { margin: 0 0 10px; font-size: clamp(1.7rem, 3vw, 2.4rem); letter-spacing: -.02em; line-height: 1.2; }
-    .section-lead { margin: 0 0 32px; color: var(--muted); max-width: 66ch; }
-    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .card {
-      background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
-      padding: 24px; box-shadow: 0 1px 2px rgba(24,33,47,.02);
-    }
-    .mark {
-      width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center;
-      margin-bottom: 16px; font-weight: 700; font-size: .9rem;
-    }
-    .mark.blue { color: var(--blue); background: #eaf1fd; }
-    .mark.orange { color: var(--orange); background: #fceee6; }
-    .mark.green { color: var(--green); background: #e8f5ec; }
-    .card h3 { margin: 0 0 8px; font-size: 1.04rem; }
-    .card p { margin: 0; color: var(--muted); font-size: .95rem; }
-    .install { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .step { padding: 0; }
+    .box h3 { margin: 0 0 10px; font-size: 1.08rem; }
+    .box p, .box li { color: var(--muted); }
+    .box ul { margin: 12px 0 0; padding-left: 18px; }
+    .box li { margin-bottom: 8px; }
+    .steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+    .step { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
     .step-num {
-      width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center;
-      font-weight: 700; color: #fff; margin-bottom: 14px; font-size: .92rem;
+      width: 34px; height: 34px; border-radius: 9px; display: grid; place-items: center;
+      font-weight: 700; font-size: .88rem; margin-bottom: 14px; color: #fff;
     }
-    .step:nth-child(1) .step-num { background: var(--blue); }
-    .step:nth-child(2) .step-num { background: var(--orange); }
-    .step:nth-child(3) .step-num { background: var(--green); }
-    .step h3 { margin: 0 0 8px; font-size: 1.04rem; }
-    .step p { margin: 0; color: var(--muted); font-size: .95rem; }
+    .s1{background:var(--blue)} .s2{background:#3f7bd9} .s3{background:var(--orange)} .s4{background:#c96b33} .s5{background:var(--green)}
+    .step h3 { margin: 0 0 8px; font-size: 1rem; }
+    .step p { margin: 0; color: var(--muted); font-size: .93rem; }
+    .audience { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .person { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; }
+    .person .icon {
+      width: 42px; height: 42px; border-radius: 11px; display: grid; place-items: center; margin-bottom: 14px;
+      font-weight: 700; font-size: .85rem;
+    }
+    .ib{background:var(--blue-soft); color:#9bc0ff} .io{background:var(--orange-soft); color:#ffb088} .ig{background:var(--green-soft); color:#8bd3aa}
+    .person h3 { margin: 0 0 8px; font-size: 1.03rem; }
+    .person p { margin: 0 0 12px; color: var(--muted); font-size: .94rem; }
+    .prompt {
+      margin: 0; padding: 12px 13px; border-radius: 10px; background: #162133; border: 1px solid #2c3f59;
+      color: #d8e5f8; font-size: .86rem; line-height: 1.55;
+    }
+    .prompt code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: #d8e5f8; }
+    .projects { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .project { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+    .project h3 { margin: 0 0 8px; font-size: 1rem; }
+    .project p { margin: 0; color: var(--muted); font-size: .93rem; }
+    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .feature { padding: 22px; border-radius: var(--radius); border: 1px solid var(--line); background: var(--surface); }
+    .feature h3 { margin: 0 0 8px; font-size: 1.02rem; }
+    .feature p { margin: 0; color: var(--muted); font-size: .94rem; }
+    .feature .line { width: 28px; height: 3px; border-radius: 2px; margin-bottom: 14px; }
+    .line.b{background:var(--blue)} .line.o{background:var(--orange)} .line.g{background:var(--green)}
+    .install-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .install-step { display: flex; gap: 14px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+    .install-step:last-child { border-bottom: 0; padding-bottom: 0; }
+    .n {
+      width: 32px; height: 32px; border-radius: 8px; flex: 0 0 auto; display: grid; place-items: center;
+      font-weight: 700; font-size: .86rem; color: #fff;
+    }
+    .n1{background:var(--blue)} .n2{background:var(--orange)} .n3{background:var(--green)}
+    .install-step h3 { margin: 0 0 4px; font-size: 1rem; }
+    .install-step p { margin: 0; color: var(--muted); font-size: .94rem; }
+    .download-box { background: var(--bg-soft); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; }
+    .download-box h3 { margin: 0 0 10px; font-size: 1.2rem; }
+    .download-box p { margin: 0 0 18px; color: var(--muted); }
+    .download-box .file { margin-top: 14px; font-size: .88rem; color: var(--muted); font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
     .cta {
-      background: var(--surface); border: 1px solid var(--line); border-radius: 20px;
-      padding: 32px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
-      box-shadow: var(--shadow);
+      background: #182436; border: 1px solid var(--line); border-radius: 18px; padding: 34px;
+      display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
     }
-    .cta h2 { margin: 0 0 8px; font-size: clamp(1.45rem, 2.5vw, 2rem); letter-spacing: -.02em; }
+    .cta h2 { margin: 0 0 8px; font-size: clamp(1.5rem, 2.8vw, 2.2rem); }
     .cta p { margin: 0; color: var(--muted); }
-    .download-meta { margin-top: 12px; font-size: .88rem; color: var(--muted); }
-    footer { padding: 36px 0 52px; color: var(--muted); font-size: .92rem; }
-    .foot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 24px; }
+    footer { padding: 42px 0 56px; border-top: 1px solid var(--line); color: var(--muted); font-size: .92rem; }
+    .foot { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .foot-links { display: flex; gap: 16px; flex-wrap: wrap; }
     .foot a:hover { color: var(--text); }
-    @media (max-width: 920px) {
-      .hero-grid { grid-template-columns: 1fr; }
-      .grid, .steps { grid-template-columns: 1fr; }
+    .muted-link { color: #c9d7eb; }
+    @media (max-width: 1020px) {
+      .steps { grid-template-columns: repeat(2, 1fr); }
+      .projects { grid-template-columns: repeat(2, 1fr); }
     }
-    @media (max-width: 640px) {
+    @media (max-width: 900px) {
+      .hero-grid, .split, .install-grid { grid-template-columns: 1fr; }
+      .audience, .features { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 680px) {
       .nav-links .hide-mobile { display: none; }
-      .hero { padding-top: 48px; }
+      .hero { padding-top: 52px; }
+      .mock-body { grid-template-columns: 1fr; }
+      .tree { border-right: 0; border-bottom: 1px solid var(--line); }
+      .steps, .audience, .projects, .features { grid-template-columns: 1fr; }
       .btn { width: 100%; }
       .actions { flex-direction: column; }
       .cta { padding: 24px; }
@@ -155,17 +197,17 @@
   </style>
 </head>
 <body>
-  <nav class="nav">
+  <nav class="nav" aria-label="Äiá»u hÆ°á»›ng chÃ­nh">
     <div class="wrap nav-inner">
       <a class="brand" href="#top" aria-label="AI-Q">
-        <img src="./icon.png" alt="AI-Q logo" width="38" height="38">
+        <img src="./icon.png" alt="Logo AI-Q" width="38" height="38">
         <span>AI-Q</span>
       </a>
       <div class="nav-links">
-        <a class="hide-mobile" href="#features">Tính năng</a>
-        <a class="hide-mobile" href="#install">Cài đặt</a>
-        <a class="hide-mobile" href="https://github.com/QuanLHK-FSC-HAG/AI-Q" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a class="btn btn-primary" href="https://github.com/QuanLHK-FSC-HAG/AI-Q/releases/download/desktop-0.0.0-prod-202611180254/AI-Q-Setup-win-x64.exe">Tải cho Windows</a>
+        <a class="hide-mobile" href="#how">CÃ¡ch hoáº¡t Ä‘á»™ng</a>
+        <a class="hide-mobile" href="#for-who">DÃ nh cho ai</a>
+        <a class="hide-mobile" href="#install">CÃ i Ä‘áº·t</a>
+        <a class="btn btn-primary" href="https://github.com/QuanLHK-FSC-HAG/AI-Q/releases/download/desktop-0.0.0-prod-202611180254/AI-Q-Setup-win-x64.exe">Táº£i AI-Q</a>
       </div>
     </div>
   </nav>
@@ -174,117 +216,293 @@
     <section class="hero">
       <div class="wrap hero-grid">
         <div>
-          <div class="tag"><b>●</b> Windows Desktop · aiq/auto</div>
-          <h1>Trợ lý lập trình AI cho Windows</h1>
-          <p class="lead">AI-Q giúp bạn code nhanh hơn với model mặc định <strong>aiq/auto</strong>, không cần tài khoản AI, hỗ trợ tiếng Việt và cài đặt chỉ bằng 1 file.</p>
+          <div class="eyebrow"><i></i>Vibe Coding trÃªn Windows</div>
+          <h1><span class="name">AI-Q</span><span class="tagline">Báº¡n cÃ³ Ã½ tÆ°á»Ÿng â€“ AI-Q giÃºp biáº¿n Ã½ tÆ°á»Ÿng thÃ nh sáº£n pháº©m.</span></h1>
+          <p class="lead"><strong>AI-Q</strong> lÃ  cÃ´ng cá»¥ Vibe Coding dÃ¹ng AI Ä‘á»ƒ táº¡o vÃ  phÃ¡t triá»ƒn pháº§n má»m trá»±c tiáº¿p trong thÆ° má»¥c trÃªn mÃ¡y tÃ­nh Windows. Báº¡n chá»n folder dá»± Ã¡n, mÃ´ táº£ yÃªu cáº§u báº±ng tiáº¿ng Viá»‡t, vÃ  AI-Q há»— trá»£ táº¡o, Ä‘á»c, chá»‰nh sá»­a cÃ¡c file ngay trong dá»± Ã¡n.</p>
           <div class="actions">
             <a class="btn btn-primary" href="https://github.com/QuanLHK-FSC-HAG/AI-Q/releases/download/desktop-0.0.0-prod-202611180254/AI-Q-Setup-win-x64.exe">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              Tải AI-Q-Setup-win-x64.exe
+              Táº£i AI-Q cho Windows
             </a>
-            <a class="btn btn-ghost" href="https://github.com/QuanLHK-FSC-HAG/AI-Q" target="_blank" rel="noopener noreferrer">Xem trên GitHub</a>
+            <a class="btn btn-ghost" href="#how">KhÃ¡m phÃ¡ cÃ¡ch hoáº¡t Ä‘á»™ng</a>
           </div>
-          <div class="notes">
-            <span><svg class="c-blue" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>1 file cài đặt</span>
-            <span><svg class="c-orange" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Không cần tài khoản AI</span>
-            <span><svg class="c-green" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Hỗ trợ tiếng Việt</span>
+          <div class="checks">
+            <span><svg class="c-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>LÃ m viá»‡c trá»±c tiáº¿p vá»›i folder local</span>
+            <span><svg class="c-orange" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Giao nhiá»‡m vá»¥ báº±ng tiáº¿ng Viá»‡t</span>
+            <span><svg class="c-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>File Ä‘Æ°á»£c táº¡o vÃ  lÆ°u trÃªn mÃ¡y báº¡n</span>
           </div>
         </div>
 
-        <div class="panel" aria-label="Xem trước AI-Q">
-          <div class="panel-head">
+        <div class="mock" aria-label="Minh há»a AI-Q lÃ m viá»‡c vá»›i thÆ° má»¥c dá»± Ã¡n">
+          <div class="mock-head">
             <div class="dots"><i></i><i></i><i></i></div>
-            <span>ai-q / status</span>
+            <span>D:\Projects\landing-page</span>
           </div>
-          <div class="terminal">
-            <p><span class="m">&gt; SYSTEM INITIALIZATION...</span></p>
-            <p><span class="k">[01]</span> Loading AI-Q Core .......... <span class="v">OK</span></p>
-            <p><span class="k">[02]</span> Initializing Model Router .. <span class="v">OK</span></p>
-            <p><span class="k">[03]</span> Default Model .............. <span class="p">aiq/auto</span></p>
-            <p><span class="k">[04]</span> AI Account ................. <span class="v">NOT REQUIRED</span></p>
-            <p><span class="k">[05]</span> Interface .................. <span class="v">VIETNAMESE</span></p>
-            <p><span class="k">[06]</span> Platform ................... <span class="v">WINDOWS</span></p>
-            <p>&nbsp;</p>
-            <p><span class="m">&gt; READY TO CODE_</span></p>
+          <div class="mock-body">
+            <div class="tree" aria-label="CÃ¢y thÆ° má»¥c dá»± Ã¡n">
+              <p class="dir">landing-page/</p>
+              <p class="file">index.html</p>
+              <p class="file">style.css</p>
+              <p class="file">script.js</p>
+              <p class="dir">assets/</p>
+              <p class="file">&nbsp;&nbsp;logo.png</p>
+            </div>
+            <div class="term" aria-label="VÃ­ dá»¥ phiÃªn lÃ m viá»‡c AI-Q">
+              <p><span class="prompt">Báº¡n:</span> <span class="cmd">Táº¡o cho tÃ´i má»™t trang giá»›i thiá»‡u sáº£n pháº©m báº±ng tiáº¿ng Viá»‡t, cÃ³ nÃºt táº£i xuá»‘ng.</span></p>
+              <p><span class="ai">AI-Q:</span> TÃ´i sáº½ táº¡o cáº¥u trÃºc file vÃ  viáº¿t ná»™i dung cho trang.</p>
+              <p class="out">+ ÄÃ£ táº¡o index.html</p>
+              <p class="out">+ ÄÃ£ táº¡o style.css</p>
+              <p class="out">+ ÄÃ£ táº¡o script.js</p>
+              <p class="out">âœ“ File Ä‘Ã£ lÆ°u trong folder dá»± Ã¡n</p>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="features">
-      <div class="wrap">
-        <h2 class="section-title">Tính năng chính</h2>
-        <p class="section-lead">AI-Q tập trung vào trải nghiệm gọn, rõ ràng trên Windows: cài nhanh, dùng ngay, dễ kiểm soát.</p>
-        <div class="grid">
-          <article class="card">
-            <div class="mark blue">01</div>
-            <h3>aiq/auto mặc định</h3>
-            <p>Tự động định tuyến đến model khả dụng, giúp bạn bắt đầu làm việc mà không cần cấu hình phức tạp.</p>
-          </article>
-          <article class="card">
-            <div class="mark orange">02</div>
-            <h3>Không cần tài khoản AI</h3>
-            <p>Mở app là dùng được ngay với luồng khởi động đơn giản, phù hợp cho người dùng Windows.</p>
-          </article>
-          <article class="card">
-            <div class="mark green">03</div>
-            <h3>1 file cài đặt</h3>
-            <p>Chỉ cần tải một file `.exe` mới nhất. Bộ cài tự tải CLI cần thiết khi có Internet.</p>
-          </article>
-          <article class="card">
-            <div class="mark blue">04</div>
-            <h3>Hỗ trợ tiếng Việt</h3>
-            <p>Giao diện và nội dung hướng tới người dùng Việt Nam, dễ đọc và dễ thao tác.</p>
-          </article>
-          <article class="card">
-            <div class="mark orange">05</div>
-            <h3>Cập nhật model/mix</h3>
-            <p>Cập nhật model/mix ngay trong Cài đặt bằng một nút bấm, không cần cài lại toàn bộ ứng dụng.</p>
-          </article>
-          <article class="card">
-            <div class="mark green">06</div>
-            <h3>Dữ liệu AI-Q độc lập</h3>
-            <p>AI-Q quản lý dữ liệu riêng để vận hành ổn định trên máy của bạn, kể cả khi máy có nhiều ứng dụng khác.</p>
-          </article>
+    <section id="vibe-coding">
+      <div class="wrap split">
+        <div>
+          <div class="section-kicker blue">Vibe Coding lÃ  gÃ¬?</div>
+          <h2>Báº¯t Ä‘áº§u tá»« Ã½ tÆ°á»Ÿng, khÃ´ng pháº£i tá»« cÃº phÃ¡p</h2>
+          <p class="section-lead" style="margin-bottom:0">Vibe Coding lÃ  cÃ¡ch báº¡n mÃ´ táº£ Ä‘iá»u mÃ¬nh muá»‘n táº¡o ra, Ä‘á»ƒ AI há»— trá»£ biáº¿n Ã½ tÆ°á»Ÿng Ä‘Ã³ thÃ nh sáº£n pháº©m tháº­t. Báº¡n táº­p trung vÃ o má»¥c tiÃªu, tráº£i nghiá»‡m vÃ  káº¿t quáº£; AI-Q há»— trá»£ pháº§n ká»¹ thuáº­t ngay trong dá»± Ã¡n trÃªn mÃ¡y tÃ­nh cá»§a báº¡n.</p>
+        </div>
+        <div class="box">
+          <h3>AI-Q khÃ¡c gÃ¬ vá»›i má»™t chatbot thÃ´ng thÆ°á»ng?</h3>
+          <ul>
+            <li>KhÃ´ng chá»‰ Ä‘Æ°a Ä‘oáº¡n mÃ£ Ä‘á»ƒ báº¡n copy.</li>
+            <li>LÃ m viá»‡c trá»±c tiáº¿p vá»›i <strong>folder dá»± Ã¡n</strong> báº¡n chá»n trÃªn mÃ¡y.</li>
+            <li>Táº¡o, Ä‘á»c, chá»‰nh sá»­a vÃ  bá»• sung file trong pháº¡m vi dá»± Ã¡n.</li>
+            <li>Giá»¯ ngá»¯ cáº£nh phiÃªn lÃ m viá»‡c Ä‘á»ƒ báº¡n tiáº¿p tá»¥c cáº£i tiáº¿n sáº£n pháº©m.</li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <section id="install" class="install">
+    <section id="how" style="padding-top:0">
       <div class="wrap">
-        <h2 class="section-title">Cài đặt trong 3 bước</h2>
-        <p class="section-lead">Chỉ cần file cài đặt mới nhất, bạn có thể bắt đầu dùng AI-Q trong vài phút.</p>
+        <div class="section-kicker orange">Quy trÃ¬nh sá»­ dá»¥ng</div>
+        <h2>AI-Q hoáº¡t Ä‘á»™ng nhÆ° tháº¿ nÃ o?</h2>
+        <p class="section-lead">Tá»« má»™t folder trÃªn mÃ¡y tÃ­nh Ä‘áº¿n sáº£n pháº©m hoÃ n chá»‰nh, má»i bÆ°á»›c Ä‘á»u rÃµ rÃ ng vÃ  náº±m trong táº§m kiá»ƒm soÃ¡t cá»§a báº¡n.</p>
         <div class="steps">
-          <div class="step">
-            <div class="step-num">1</div>
-            <h3>Tải bộ cài</h3>
-            <p>Tải file <strong>AI-Q-Setup-win-x64.exe</strong> mới nhất từ nút tải trên trang này.</p>
+          <article class="step">
+            <div class="step-num s1">1</div>
+            <h3>Táº¡o dá»± Ã¡n</h3>
+            <p>Táº¡o má»›i hoáº·c chá»n má»™t folder cÃ³ sáºµn trÃªn mÃ¡y tÃ­nh Windows cá»§a báº¡n.</p>
+          </article>
+          <article class="step">
+            <div class="step-num s2">2</div>
+            <h3>Má»Ÿ phiÃªn lÃ m viá»‡c</h3>
+            <p>Khá»Ÿi táº¡o phiÃªn AI-Q gáº¯n vá»›i thÆ° má»¥c dá»± Ã¡n Ä‘á»ƒ AI hiá»ƒu Ä‘Ãºng pháº¡m vi cÃ´ng viá»‡c.</p>
+          </article>
+          <article class="step">
+            <div class="step-num s3">3</div>
+            <h3>Giao nhiá»‡m vá»¥</h3>
+            <p>MÃ´ táº£ yÃªu cáº§u báº±ng tiáº¿ng Viá»‡t tá»± nhiÃªn, nhÆ° báº¡n Ä‘ang trao Ä‘á»•i vá»›i cá»™ng sá»±.</p>
+          </article>
+          <article class="step">
+            <div class="step-num s4">4</div>
+            <h3>AI-Q thá»±c hiá»‡n</h3>
+            <p>AI-Q táº¡o cáº¥u trÃºc, sinh file, chá»‰nh sá»­a mÃ£ vÃ  triá»ƒn khai yÃªu cáº§u trong dá»± Ã¡n.</p>
+          </article>
+          <article class="step">
+            <div class="step-num s5">5</div>
+            <h3>Tiáº¿p tá»¥c Vibe Coding</h3>
+            <p>Sá»­a lá»—i, thÃªm tÃ­nh nÄƒng, Ä‘á»•i giao diá»‡n vÃ  hoÃ n thiá»‡n sáº£n pháº©m theo Ã½ báº¡n.</p>
+          </article>
+        </div>
+      </div>
+    </section>    <section id="for-who">
+      <div class="wrap">
+        <div class="section-kicker green">AI-Q dÃ nh cho ai?</div>
+        <h2>Ai cÅ©ng cÃ³ thá»ƒ báº¯t Ä‘áº§u sÃ¡ng táº¡o pháº§n má»m báº±ng AI</h2>
+        <p class="section-lead">DÃ¹ báº¡n chÆ°a biáº¿t láº­p trÃ¬nh hay Ä‘Ã£ lÃ  láº­p trÃ¬nh viÃªn, AI-Q giÃºp báº¡n biáº¿n Ã½ tÆ°á»Ÿng thÃ nh sáº£n pháº©m ngay trong folder dá»± Ã¡n trÃªn mÃ¡y tÃ­nh.</p>
+        <div class="audience">
+          <article class="person">
+            <div class="icon ib">01</div>
+            <h3>NgÆ°á»i chÆ°a biáº¿t láº­p trÃ¬nh</h3>
+            <p>Biáº¿n Ã½ tÆ°á»Ÿng thÃ nh website, á»©ng dá»¥ng vÃ  cÃ´ng cá»¥ Ä‘Æ¡n giáº£n mÃ  khÃ´ng cáº§n há»c cÃº phÃ¡p trÆ°á»›c.</p>
+            <p class="prompt"><code>"Táº¡o cho tÃ´i má»™t trang web giá»›i thiá»‡u quÃ¡n cÃ  phÃª cÃ³ menu, Ä‘á»‹a chá»‰ vÃ  nÃºt gá»i Ä‘iá»‡n."</code></p>
+          </article>
+          <article class="person">
+            <div class="icon io">02</div>
+            <h3>GiÃ¡o viÃªn</h3>
+            <p>Táº¡o pháº§n má»m dáº¡y há»c, trÃ² chÆ¡i tÆ°Æ¡ng tÃ¡c, bÃ i kiá»ƒm tra vÃ  cÃ´ng cá»¥ quáº£n lÃ½ lá»›p há»c.</p>
+            <p class="prompt"><code>"Táº¡o má»™t trÃ² chÆ¡i tráº¯c nghiá»‡m ToÃ¡n lá»›p 5 cÃ³ Ä‘iá»ƒm sá»‘ vÃ  thÃ´ng bÃ¡o Ä‘Ãºng sai."</code></p>
+          </article>
+          <article class="person">
+            <div class="icon ig">03</div>
+            <h3>Há»c sinh, sinh viÃªn</h3>
+            <p>Há»c láº­p trÃ¬nh, xÃ¢y dá»±ng dá»± Ã¡n STEM, game vÃ  sáº£n pháº©m sÃ¡ng táº¡o cho bÃ i táº­p hoáº·c cuá»™c thi.</p>
+            <p class="prompt"><code>"Táº¡o má»™t á»©ng dá»¥ng ghi chÃº há»c táº­p cÃ³ tÃ¬m kiáº¿m vÃ  lÆ°u dá»¯ liá»‡u trÃªn mÃ¡y."</code></p>
+          </article>
+          <article class="person">
+            <div class="icon ib">04</div>
+            <h3>NhÃ¢n viÃªn vÄƒn phÃ²ng</h3>
+            <p>Táº¡o cÃ´ng cá»¥ xá»­ lÃ½ Excel, PDF, dá»¯ liá»‡u vÃ  tá»± Ä‘á»™ng hÃ³a cÃ¡c cÃ´ng viá»‡c láº·p láº¡i.</p>
+            <p class="prompt"><code>"Viáº¿t script Python Ä‘á»c file Excel bÃ¡o cÃ¡o vÃ  táº¡o báº£ng tá»•ng há»£p theo thÃ¡ng."</code></p>
+          </article>
+          <article class="person">
+            <div class="icon io">05</div>
+            <h3>NgÆ°á»i quáº£n lÃ½, kinh doanh</h3>
+            <p>Táº¡o dashboard, á»©ng dá»¥ng quáº£n lÃ½ vÃ  cÃ´ng cá»¥ há»— trá»£ nghiá»‡p vá»¥ theo cÃ¡ch lÃ m cá»§a Ä‘á»™i nhÃ³m.</p>
+            <p class="prompt"><code>"Táº¡o dashboard quáº£n lÃ½ Ä‘Æ¡n hÃ ng Ä‘Æ¡n giáº£n, cÃ³ lá»c theo tráº¡ng thÃ¡i vÃ  xuáº¥t bÃ¡o cÃ¡o."</code></p>
+          </article>
+          <article class="person">
+            <div class="icon ig">06</div>
+            <h3>Láº­p trÃ¬nh viÃªn</h3>
+            <p>PhÃ¡t triá»ƒn dá»± Ã¡n, Ä‘á»c vÃ  sá»­a mÃ£ nguá»“n, tÃ¬m lá»—i, tÃ¡i cáº¥u trÃºc vÃ  tá»‘i Æ°u pháº§n má»m nhanh hÆ¡n.</p>
+            <p class="prompt"><code>"Äá»c folder nÃ y, tÃ¬m lá»—i khiáº¿n API tráº£ vá» 500 vÃ  Ä‘á» xuáº¥t cÃ¡ch sá»­a an toÃ n."</code></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" style="padding-top:0">
+      <div class="wrap">
+        <div class="section-kicker blue">Báº¡n cÃ³ thá»ƒ táº¡o gÃ¬ vá»›i AI-Q?</div>
+        <h2>Tá»« Ã½ tÆ°á»Ÿng nhá» Ä‘áº¿n sáº£n pháº©m hoÃ n chá»‰nh</h2>
+        <p class="section-lead">AI-Q há»— trá»£ nhiá»u loáº¡i dá»± Ã¡n. Báº¡n mÃ´ táº£ má»¥c tiÃªu, AI-Q táº¡o vÃ  chá»‰nh sá»­a file trá»±c tiáº¿p trong folder báº¡n chá»n.</p>
+        <div class="projects">
+          <article class="project">
+            <h3>Website giá»›i thiá»‡u</h3>
+            <p>Landing page, trang cÃ¡ nhÃ¢n, trang sáº£n pháº©m, portfolio vá»›i ná»™i dung tiáº¿ng Viá»‡t.</p>
+          </article>
+          <article class="project">
+            <h3>á»¨ng dá»¥ng ná»™i bá»™</h3>
+            <p>CÃ´ng cá»¥ quáº£n lÃ½ cÃ´ng viá»‡c, theo dÃµi khÃ¡ch hÃ ng, dashboard bÃ¡o cÃ¡o Ä‘Æ¡n giáº£n.</p>
+          </article>
+          <article class="project">
+            <h3>CÃ´ng cá»¥ tá»± Ä‘á»™ng hÃ³a</h3>
+            <p>Script xá»­ lÃ½ file Excel, PDF, Ä‘á»•i tÃªn hÃ ng loáº¡t, tá»•ng há»£p dá»¯ liá»‡u theo quy táº¯c.</p>
+          </article>
+          <article class="project">
+            <h3>Dá»± Ã¡n há»c táº­p</h3>
+            <p>Game nhá», á»©ng dá»¥ng STEM, demo khoa há»c dá»¯ liá»‡u, bÃ i táº­p láº­p trÃ¬nh cÃ³ cáº¥u trÃºc rÃµ rÃ ng.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" style="padding-top:0">
+      <div class="wrap">
+        <div class="section-kicker orange">TÃ­nh nÄƒng ná»•i báº­t</div>
+        <h2>Thiáº¿t káº¿ Ä‘á»ƒ lÃ m viá»‡c vá»›i dá»± Ã¡n tháº­t</h2>
+        <p class="section-lead">AI-Q táº­p trung vÃ o hÃ nh Ä‘á»™ng trong folder dá»± Ã¡n, giÃºp báº¡n Ä‘i tá»« yÃªu cáº§u Ä‘áº¿n file vÃ  sáº£n pháº©m.</p>
+        <div class="features">
+          <article class="feature">
+            <div class="line b"></div>
+            <h3>LÃ m viá»‡c trá»±c tiáº¿p vá»›i folder</h3>
+            <p>Chá»n thÆ° má»¥c dá»± Ã¡n trÃªn mÃ¡y, AI-Q táº¡o vÃ  chá»‰nh sá»­a file ngay trong Ä‘Ã³, khÃ´ng chá»‰ tráº£ lá»i trong khung chat.</p>
+          </article>
+          <article class="feature">
+            <div class="line o"></div>
+            <h3>Giao nhiá»‡m vá»¥ báº±ng tiáº¿ng Viá»‡t</h3>
+            <p>MÃ´ táº£ yÃªu cáº§u tá»± nhiÃªn, tá»« táº¡o trang web Ä‘áº¿n sá»­a lá»—i, AI-Q hiá»ƒu vÃ  thá»±c hiá»‡n theo ngá»¯ cáº£nh dá»± Ã¡n.</p>
+          </article>
+          <article class="feature">
+            <div class="line g"></div>
+            <h3>Tiáº¿p tá»¥c cáº£i tiáº¿n liÃªn tá»¥c</h3>
+            <p>Sau khi cÃ³ phiÃªn báº£n Ä‘áº§u, báº¡n cÃ³ thá»ƒ yÃªu cáº§u sá»­a lá»—i, thÃªm tÃ­nh nÄƒng, Ä‘á»•i giao diá»‡n hoáº·c tá»‘i Æ°u.</p>
+          </article>
+          <article class="feature">
+            <div class="line b"></div>
+            <h3>PhÃ¹ há»£p nhiá»u Ä‘á»‘i tÆ°á»£ng</h3>
+            <p>Tá»« ngÆ°á»i má»›i báº¯t Ä‘áº§u Ä‘áº¿n láº­p trÃ¬nh viÃªn, AI-Q há»— trá»£ theo má»©c Ä‘á»™ vÃ  má»¥c tiÃªu cá»§a tá»«ng ngÆ°á»i.</p>
+          </article>
+          <article class="feature">
+            <div class="line o"></div>
+            <h3>CÃ i Ä‘áº·t Ä‘Æ¡n giáº£n trÃªn Windows</h3>
+            <p>Má»™t file cÃ i Ä‘áº·t, quy trÃ¬nh rÃµ rÃ ng. Báº¡n cÃ³ thá»ƒ báº¯t Ä‘áº§u phiÃªn Vibe Coding Ä‘áº§u tiÃªn trong vÃ i phÃºt.</p>
+          </article>
+          <article class="feature">
+            <div class="line g"></div>
+            <h3>Minh báº¡ch trong dá»± Ã¡n</h3>
+            <p>File Ä‘Æ°á»£c táº¡o ra náº±m ngay trong folder báº¡n chá»n, dá»… kiá»ƒm tra, chá»‰nh sá»­a vÃ  quáº£n lÃ½ theo cÃ¡ch cá»§a báº¡n.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="install">
+      <div class="wrap">
+        <div class="section-kicker green">Báº¯t Ä‘áº§u sá»­ dá»¥ng</div>
+        <h2>CÃ i Ä‘áº·t AI-Q vÃ  báº¯t Ä‘áº§u Vibe Coding</h2>
+        <p class="section-lead">Chá»‰ vÃ i bÆ°á»›c Ä‘á»ƒ cÃ³ AI-Q trÃªn mÃ¡y Windows vÃ  báº¯t Ä‘áº§u táº¡o sáº£n pháº©m Ä‘áº§u tiÃªn.</p>
+        <div class="install-grid">
+          <div class="box">
+            <div class="install-step">
+              <div class="n n1">1</div>
+              <div>
+                <h3>Táº£i file cÃ i Ä‘áº·t má»›i nháº¥t</h3>
+                <p>Táº£i <strong>AI-Q-Setup-win-x64.exe</strong> tá»« nÃºt táº£i chÃ­nh thá»©c. Cáº§n Internet khi cÃ i Ä‘á»ƒ táº£i cÃ¡c thÃ nh pháº§n cáº§n thiáº¿t.</p>
+              </div>
+            </div>
+            <div class="install-step">
+              <div class="n n2">2</div>
+              <div>
+                <h3>CÃ i Ä‘áº·t trÃªn Windows</h3>
+                <p>Cháº¡y bá»™ cÃ i, chá»n thÆ° má»¥c cÃ i Ä‘áº·t vÃ  nháº­p tÃªn ngÆ°á»i dÃ¹ng. LÃ m theo hÆ°á»›ng dáº«n trÃªn mÃ n hÃ¬nh Ä‘á»ƒ hoÃ n táº¥t.</p>
+              </div>
+            </div>
+            <div class="install-step">
+              <div class="n n3">3</div>
+              <div>
+                <h3>Chá»n folder vÃ  báº¯t Ä‘áº§u</h3>
+                <p>Má»Ÿ AI-Q, chá»n má»™t folder dá»± Ã¡n, táº¡o phiÃªn lÃ m viá»‡c vÃ  mÃ´ táº£ Ã½ tÆ°á»Ÿng báº±ng tiáº¿ng Viá»‡t.</p>
+              </div>
+            </div>
           </div>
-          <div class="step">
-            <div class="step-num">2</div>
-            <h3>Cài đặt</h3>
-            <p>Chạy bộ cài, chọn thư mục và nhập tên người dùng. Cần Internet để tải CLI khi cài.</p>
-          </div>
-          <div class="step">
-            <div class="step-num">3</div>
-            <h3>Bắt đầu dùng</h3>
-            <p>Mở AI-Q và làm việc ngay với model mặc định <strong>aiq/auto</strong>.</p>
+          <div class="download-box">
+            <h3>Táº£i AI-Q cho Windows</h3>
+            <p>Báº£n cÃ i Ä‘áº·t má»›i nháº¥t cho Windows. PhÃ¹ há»£p Ä‘á»ƒ báº¯t Ä‘áº§u Vibe Coding ngay trÃªn mÃ¡y tÃ­nh cá»§a báº¡n.</p>
+            <div class="actions" style="margin-bottom:0">
+              <a class="btn btn-primary" href="https://github.com/QuanLHK-FSC-HAG/AI-Q/releases/download/desktop-0.0.0-prod-202611180254/AI-Q-Setup-win-x64.exe">Táº£i file má»›i nháº¥t</a>
+              <a class="btn btn-ghost" href="https://github.com/QuanLHK-FSC-HAG/AI-Q" target="_blank" rel="noopener noreferrer">Xem GitHub</a>
+            </div>
+            <div class="file">AI-Q-Setup-win-x64.exe</div>
           </div>
         </div>
       </div>
     </section>
 
-    <section>
+
+    <section id="tech" style="padding-top:0">
+      <div class="wrap">
+        <div class="section-kicker blue">Thông tin kỹ thuật</div>
+        <h2>Mã nguồn mở, minh bạch và sẵn sàng phát triển</h2>
+        <p class="section-lead">AI-Q được phát triển công khai. Bạn có thể theo dõi mã nguồn, tài liệu và các bản phát hành trên GitHub.</p>
+        <div class="split">
+          <div class="box">
+            <h3>Dành cho người dùng</h3>
+            <ul>
+              <li>Chạy trên Windows, cài đặt bằng 1 file.</li>
+              <li>Làm việc trực tiếp với thư mục dự án trên máy.</li>
+              <li>Giao nhiệm vụ bằng tiếng Việt, AI-Q hỗ trợ tạo và chỉnh sửa file.</li>
+              <li>Phù hợp cho Vibe Coding, học tập, tự động hóa và phát triển phần mềm.</li>
+            </ul>
+          </div>
+          <div class="box">
+            <h3>Tài nguyên</h3>
+            <ul>
+              <li><a class="muted-link" href="https://github.com/QuanLHK-FSC-HAG/AI-Q" target="_blank" rel="noopener noreferrer">GitHub repository</a></li>
+              <li><a class="muted-link" href="https://github.com/QuanLHK-FSC-HAG/AI-Q/releases/download/desktop-0.0.0-prod-202611180254/AI-Q-Setup-win-x64.exe">Tải file cài đặt mới nhất</a></li>
+              <li><a class="muted-link" href="https://github.com/QuanLHK-FSC-HAG/AI-Q/blob/main/document/CAI_DAT_VA_CLI.md" target="_blank" rel="noopener noreferrer">Hướng dẫn cài đặt và CLI</a></li>
+              <li>Tác giả: <strong>QuanLHK</strong> · © 2026 QuanLHK</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section style="padding-top:0">
       <div class="wrap">
         <div class="cta">
           <div>
-            <h2>Sẵn sàng dùng AI-Q trên Windows?</h2>
-            <p>Tải bản cài đặt mới nhất và bắt đầu làm việc với AI-Q.</p>
-            <div class="download-meta">File mới nhất: AI-Q-Setup-win-x64.exe</div>
+            <h2>Biáº¿n Ã½ tÆ°á»Ÿng thÃ nh sáº£n pháº©m vá»›i AI-Q</h2>
+            <p>Chá»n má»™t folder, mÃ´ táº£ Ä‘iá»u báº¡n muá»‘n, vÃ  Ä‘á»ƒ AI-Q Ä‘á»“ng hÃ nh cÃ¹ng báº¡n trong tá»«ng phiÃªn Vibe Coding.</p>
           </div>
           <div class="actions" style="margin:0">
-            <a class="btn btn-primary" href="https://github.com/QuanLHK-FSC-HAG/AI-Q/releases/download/desktop-0.0.0-prod-202611180254/AI-Q-Setup-win-x64.exe">Tải file mới nhất</a>
-            <a class="btn btn-ghost" href="https://github.com/QuanLHK-FSC-HAG/AI-Q" target="_blank" rel="noopener noreferrer">Xem GitHub</a>
+            <a class="btn btn-primary" href="https://github.com/QuanLHK-FSC-HAG/AI-Q/releases/download/desktop-0.0.0-prod-202611180254/AI-Q-Setup-win-x64.exe">Táº£i AI-Q</a>
           </div>
         </div>
       </div>
@@ -293,12 +511,18 @@
 
   <footer>
     <div class="wrap foot">
-      <div>© 2026 QuanLHK · AI-Q. Designed by QuanLHK with AI.</div>
-      <div style="display:flex;gap:16px;flex-wrap:wrap;">
-        <a href="https://github.com/QuanLHK-FSC-HAG/AI-Q" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a href="https://q-ai-six.vercel.app" target="_blank" rel="noopener noreferrer">q-ai-six.vercel.app</a>
+      <div>
+        <div style="font-weight:650;color:#dce7f7;margin-bottom:6px;">AI-Q</div>
+        <div>Vibe Coding ngay trÃªn mÃ¡y tÃ­nh cá»§a báº¡n.</div>
+        <div style="margin-top:8px;">Â© 2026 QuanLHK Â· Designed by QuanLHK with AI</div>
+      </div>
+      <div class="foot-links">
+        <a class="muted-link" href="https://github.com/QuanLHK-FSC-HAG/AI-Q" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a class="muted-link" href="https://github.com/QuanLHK-FSC-HAG/AI-Q/releases/download/desktop-0.0.0-prod-202611180254/AI-Q-Setup-win-x64.exe">Táº£i file má»›i nháº¥t</a>
+        <a class="muted-link" href="document/CAI_DAT_VA_CLI.md">HÆ°á»›ng dáº«n cÃ i Ä‘áº·t</a>
       </div>
     </div>
   </footer>
 </body>
 </html>
+

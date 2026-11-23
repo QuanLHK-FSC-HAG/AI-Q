@@ -4,37 +4,45 @@
 
 # AI-Q
 
-**Trợ lý lập trình AI cho Windows**  
-Cài 1 file · Dùng `aiq/auto` · Không cần tài khoản AI · Hỗ trợ tiếng Việt
+**Vibe Coding ngay trên máy tính của bạn**  
+Bạn có ý tưởng – AI-Q giúp biến ý tưởng thành sản phẩm.
 
 [![Website](https://img.shields.io/badge/Website-q--ai--six.vercel.app-1D63D8?style=for-the-badge&logo=vercel&logoColor=white)](https://q-ai-six.vercel.app)
-[![Download](https://img.shields.io/badge/Tải_file_mới_nhất-Windows_.exe-E56F2F?style=for-the-badge&logo=windows&logoColor=white)](https://github.com/QuanLHK-FSC-HAG/AI-Q/releases/download/desktop-0.0.0-prod-202611180254/AI-Q-Setup-win-x64.exe)
+[![Download](https://img.shields.io/badge/Tải_AI--Q-Windows_.exe-E56F2F?style=for-the-badge&logo=windows&logoColor=white)](https://github.com/QuanLHK-FSC-HAG/AI-Q/releases/download/desktop-0.0.0-prod-202611180254/AI-Q-Setup-win-x64.exe)
 [![GitHub](https://img.shields.io/badge/GitHub-AI--Q-249454?style=for-the-badge&logo=github&logoColor=white)](https://github.com/QuanLHK-FSC-HAG/AI-Q)
 
 <br/>
 
-[Trang web](https://q-ai-six.vercel.app) · [Tải file mới nhất](https://github.com/QuanLHK-FSC-HAG/AI-Q/releases/download/desktop-0.0.0-prod-202611180254/AI-Q-Setup-win-x64.exe) · [Hướng dẫn cài đặt](document/CAI_DAT_VA_CLI.md)
+[Trang web](https://q-ai-six.vercel.app) · [Tải AI-Q cho Windows](https://github.com/QuanLHK-FSC-HAG/AI-Q/releases/download/desktop-0.0.0-prod-202611180254/AI-Q-Setup-win-x64.exe) · [Hướng dẫn cài đặt](document/CAI_DAT_VA_CLI.md)
 
 </div>
 
 ---
 
-## Giới thiệu
+## AI-Q là gì?
 
-**AI-Q** là trợ lý lập trình AI dành cho Windows, được thiết kế để bạn có thể cài nhanh, mở lên và dùng ngay. AI-Q dùng `aiq/auto` làm model mặc định, hỗ trợ tiếng Việt và tập trung vào trải nghiệm gọn, rõ ràng.
+**AI-Q** là công cụ Vibe Coding dùng AI để tạo và phát triển phần mềm trực tiếp trong thư mục dự án trên máy tính Windows.
 
-> **Lưu ý:** AI-Q hướng tới trải nghiệm sử dụng miễn phí thông qua `aiq/auto` khi có model khả dụng. Hạn mức/quota, tốc độ và khả năng truy cập phụ thuộc nhà cung cấp/model, thời điểm và điều kiện mạng/thiết bị; có thể thay đổi, bị giới hạn hoặc gián đoạn.
+AI-Q không chỉ đưa đoạn mã để bạn sao chép. Bạn có thể chọn folder dự án, mở phiên làm việc, mô tả yêu cầu bằng tiếng Việt và để AI-Q hỗ trợ tạo, đọc, chỉnh sửa, bổ sung các file ngay trong dự án.
 
-## Tính năng chính
+## Cách AI-Q hoạt động
 
-| Tính năng | Mô tả |
+1. **Tạo dự án** - Tạo mới hoặc chọn một folder có sẵn trên máy tính.
+2. **Mở phiên làm việc** - Khởi tạo phiên AI-Q gắn với thư mục dự án.
+3. **Giao nhiệm vụ** - Mô tả yêu cầu bằng tiếng Việt tự nhiên.
+4. **AI-Q thực hiện** - Tạo cấu trúc, sinh file, chỉnh sửa mã trong phạm vi dự án.
+5. **Tiếp tục Vibe Coding** - Sửa lỗi, bổ sung tính năng, đổi giao diện, hoàn thiện sản phẩm.
+
+## AI-Q dành cho ai?
+
+| Đối tượng | Bạn có thể làm gì |
 |---|---|
-| **aiq/auto mặc định** | Tự động định tuyến đến model khả dụng, giảm cấu hình thủ công. |
-| **Không cần tài khoản AI** | Mở app và bắt đầu dùng với luồng khởi động đơn giản. |
-| **1 file cài đặt Windows** | Chỉ cần tải file `AI-Q-Setup-win-x64.exe` mới nhất và cài đặt. |
-| **Cập nhật model/mix tại chỗ** | Bấm 1 nút trong Cài đặt để cập nhật model/mix, không cần cài lại app. |
-| **Hỗ trợ tiếng Việt** | Giao diện và trải nghiệm thân thiện với người dùng Việt Nam. |
-| **Dữ liệu AI-Q độc lập** | AI-Q quản lý dữ liệu riêng để vận hành ổn định trên máy của bạn. |
+| **Người chưa biết lập trình** | Biến ý tưởng thành website, ứng dụng và công cụ đơn giản. |
+| **Giáo viên** | Tạo phần mềm dạy học, trò chơi tương tác, bài kiểm tra. |
+| **Học sinh, sinh viên** | Học lập trình, xây dựng dự án STEM, game và sản phẩm sáng tạo. |
+| **Nhân viên văn phòng** | Tạo công cụ xử lý Excel, PDF, dữ liệu và tự động hóa công việc. |
+| **Người quản lý, kinh doanh** | Tạo dashboard, ứng dụng quản lý và công cụ hỗ trợ nghiệp vụ. |
+| **Lập trình viên** | Đọc/sửa mã nguồn, tìm lỗi, tái cấu trúc và tối ưu phần mềm. |
 
 ## Tải xuống
 
@@ -48,23 +56,12 @@ Cài 1 file · Dùng `aiq/auto` · Không cần tài khoản AI · Hỗ trợ ti
 
 1. Tải file `AI-Q-Setup-win-x64.exe` mới nhất.
 2. Chạy bộ cài, chọn thư mục cài đặt và nhập tên người dùng.
-3. Mở AI-Q và bắt đầu sử dụng với model mặc định `aiq/auto`.
-
-## Build từ mã nguồn
-
-```powershell
-git clone https://github.com/QuanLHK-FSC-HAG/AI-Q.git
-cd AI-Q
-bun install
-cd packages/desktop
-bun run build
-```
+3. Mở AI-Q, chọn folder dự án và bắt đầu Vibe Coding bằng tiếng Việt.
 
 ## Bảo mật & quyền riêng tư
 
 - AI-Q có thể gửi dữ liệu đến nhà cung cấp AI để xử lý khi bạn sử dụng tính năng AI.
 - Người dùng cần xem xét dữ liệu trước khi gửi và chịu trách nhiệm với nội dung gửi đi.
-- Vui lòng xem thêm tài liệu/chính sách trong repo trước khi sử dụng.
 
 ## Tác giả
 
