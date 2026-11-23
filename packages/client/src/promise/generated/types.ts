@@ -2719,6 +2719,14 @@ export type ScheduleInfo = {
   time: { created: number; updated: number }
 }
 
+export type ConfigMixRefreshResult = {
+  mix: ConfigMixInfo
+  added: number | "Infinity" | "-Infinity" | "NaN"
+  updated: number | "Infinity" | "-Infinity" | "NaN"
+  skipped: number | "Infinity" | "-Infinity" | "NaN"
+  refreshedAt: number | "Infinity" | "-Infinity" | "NaN"
+}
+
 export type AgentInfo = {
   id: AgentID
   name: string
@@ -4939,6 +4947,8 @@ export type ExperimentalConfigExperimentalMixSetInput = {
 
 export type ExperimentalConfigExperimentalMixSetOutput = ConfigMixInfo
 
+export type ExperimentalConfigExperimentalMixRefreshOutput = ConfigMixRefreshResult
+
 export type ExperimentalConfigUpdateInput = { readonly shell: string | null }
 
 export type ExperimentalConfigUpdateOutput = void
@@ -5095,6 +5105,9 @@ export type ConfigExperimentalMixSetInput = ExperimentalConfigExperimentalMixSet
 
 /** @deprecated Use `ExperimentalConfigExperimentalMixSetOutput`. Removed in the next minor. */
 export type ConfigExperimentalMixSetOutput = ExperimentalConfigExperimentalMixSetOutput
+
+/** @deprecated Use `ExperimentalConfigExperimentalMixRefreshOutput`. Removed in the next minor. */
+export type ConfigExperimentalMixRefreshOutput = ExperimentalConfigExperimentalMixRefreshOutput
 
 /** @deprecated Use `ExperimentalConfigUpdateInput`. Removed in the next minor. */
 export type ConfigUpdateInput = ExperimentalConfigUpdateInput

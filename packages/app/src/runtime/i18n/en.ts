@@ -1495,6 +1495,10 @@ export const dict = {
   "settings.mix.candidate.missing":
     "Some of the mix's models are no longer available. Remove or replace them to use the mix.",
   "settings.mix.save.error": "Could not save the mix. Try again.",
+  "settings.mix.refresh": "Update models/mix",
+  "settings.mix.refreshing": "Updating models/mix",
+  "settings.mix.refresh.success": "Models and mix updated.",
+  "settings.mix.refresh.error": "Could not update models/mix. Try again.",
   "settings.mix.weight": "Weight",
   "settings.mix.balance.hint": "Quota mixes per request",
 }

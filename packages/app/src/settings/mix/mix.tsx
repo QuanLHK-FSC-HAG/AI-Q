@@ -32,6 +32,7 @@ type Combo = {
 type MixState = {
   loading: boolean
   saving: boolean
+  refreshing: boolean
   hideReal: boolean
   combos: Combo[]
 }
@@ -77,7 +78,7 @@ export const SettingsMix: Component = () => {
   const local = useLocal()
   const surface = useSettingsSurface()
 
-  const [store, setStore] = createStore<MixState>({ loading: true, saving: false, hideReal: false, combos: [] })
+  const [store, setStore] = createStore<MixState>({ loading: true, saving: false, refreshing: false, hideReal: false, combos: [] })
 
   const save = async (patch: { hideReal?: boolean; combos?: Combo[] }) => {
     if (store.saving) return false
@@ -102,6 +103,22 @@ export const SettingsMix: Component = () => {
   }
 
   const saveCombination = (combos: Combo[]) => save({ combos: clone(combos) })
+
+  const refresh = async () => {
+    if (store.refreshing) return
+    setStore("refreshing", true)
+
+    try {
+      const output = await server.ctx.sdk.api.experimental.config.experimental.mix.refresh()
+      setStore("hideReal", output.mix.hideReal)
+      setStore("combos", clone(output.mix.combos).map(normalizeCombo))
+      showToast({ variant: "success", title: language.t("settings.mix.refresh.success") })
+    } catch {
+      showToast({ variant: "error", title: language.t("settings.mix.refresh.error") })
+    } finally {
+      setStore("refreshing", false)
+    }
+  }
 
   // The mix is one global value; re-read it whenever the page mounts.
   createEffect(() => {
@@ -162,6 +179,14 @@ export const SettingsMix: Component = () => {
             <h2 class="settings-tab-title">{language.t("settings.mix.title")}</h2>
             <span class="text-11-regular text-v2-text-text-muted">{language.t("settings.mix.description")}</span>
           </div>
+          <Button
+            variant="outline"
+            size="small"
+            disabled={store.refreshing || store.loading}
+            onClick={() => void refresh()}
+          >
+            {store.refreshing ? language.t("settings.mix.refreshing") : language.t("settings.mix.refresh")}
+          </Button>
         </div>
       </div>
 

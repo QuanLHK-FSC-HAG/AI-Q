@@ -872,6 +872,10 @@ export const dict = {
   "settings.mix.candidate.remove": "Xóa khỏi mix",
   "settings.mix.candidate.missing": "Một số model trong mix không còn khả dụng. Xóa hoặc thay thế để dùng.",
   "settings.mix.save.error": "Không thể lưu mix. Thử lại.",
+  "settings.mix.refresh": "Update models/mix",
+  "settings.mix.refreshing": "Updating models/mix",
+  "settings.mix.refresh.success": "Models and mix updated.",
+  "settings.mix.refresh.error": "Could not update models/mix. Try again.",
   "settings.mix.weight": "Trọng số",
   "settings.mix.balance.hint": "Mix quota theo từng request",
 }

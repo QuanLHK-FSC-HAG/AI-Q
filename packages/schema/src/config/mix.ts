@@ -35,3 +35,14 @@ export const Patch = Schema.Struct({
   hideReal: optional(Schema.Boolean),
   combos: optional(Schema.Array(Combo)),
 }).annotate({ identifier: "ConfigMix.Patch" })
+
+/** Result of refreshing model catalog and merging resolvable candidates into Mix. */
+export const RefreshResult = Schema.Struct({
+  mix: Info,
+  added: Schema.Number,
+  updated: Schema.Number,
+  skipped: Schema.Number,
+  refreshedAt: Schema.Number,
+}).annotate({ identifier: "ConfigMix.RefreshResult" })
+
+export interface RefreshResult extends Schema.Schema.Type<typeof RefreshResult> {}

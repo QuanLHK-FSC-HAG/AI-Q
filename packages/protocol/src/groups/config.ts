@@ -57,6 +57,18 @@ export const ConfigGroup = HttpApiGroup.make("server.config")
     ),
   )
   .add(
+    HttpApiEndpoint.post("mix.refresh", "/api/experimental/mix/refresh", {
+      success: ConfigMix.RefreshResult,
+    }).annotateMerge(
+      OpenApi.annotations({
+        identifier: "experimental.mix.refresh",
+        summary: "Refresh AI-Q models and mix",
+        description:
+          "Refresh the model catalog and additively merge resolvable candidates into the existing mix. Does not update the app binary.",
+      }),
+    ),
+  )
+  .add(
     HttpApiEndpoint.patch("config.update", "/api/experimental/config", {
       payload: Config.Patch,
       success: HttpApiSchema.NoContent,

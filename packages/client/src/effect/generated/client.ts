@@ -319,6 +319,7 @@ import type {
   ExperimentalConfigExperimentalMixGetOutput,
   ExperimentalConfigExperimentalMixSetInput,
   ExperimentalConfigExperimentalMixSetOutput,
+  ExperimentalConfigExperimentalMixRefreshOutput,
   ExperimentalConfigUpdateInput,
   ExperimentalConfigUpdateOutput,
 } from "../api/api.js"
@@ -1966,6 +1967,11 @@ const EndpointExperimentalConfigExperimentalMixSet =
       ),
     )
 
+const EndpointExperimentalConfigExperimentalMixRefresh = (raw: RawClient["server.config"]) => () =>
+  preserveEffect<ExperimentalConfigExperimentalMixRefreshOutput>()(
+    raw["mix.refresh"]({}).pipe(Effect.mapError(mapClientError)),
+  )
+
 const EndpointExperimentalConfigUpdate = (raw: RawClient["server.config"]) => (input: ExperimentalConfigUpdateInput) =>
   preserveEffect<ExperimentalConfigUpdateOutput>()(
     raw["config.update"]({ payload: { shell: input["shell"] } }).pipe(Effect.mapError(mapClientError)),
@@ -1976,6 +1982,7 @@ const adaptGroupExperimentalConfig = (raw: RawClient["server.config"]) => ({
     mix: {
       get: EndpointExperimentalConfigExperimentalMixGet(raw),
       set: EndpointExperimentalConfigExperimentalMixSet(raw),
+      refresh: EndpointExperimentalConfigExperimentalMixRefresh(raw),
     },
   },
   update: EndpointExperimentalConfigUpdate(raw),
@@ -2122,6 +2129,8 @@ const adaptClient = (raw: RawClient) => {
           get: client.experimental.config.experimental.mix.get,
           /** @deprecated Use `client.experimental.config.experimental.mix.set`. Removed in the next minor. */
           set: client.experimental.config.experimental.mix.set,
+          /** @deprecated Use `client.experimental.config.experimental.mix.refresh`. Removed in the next minor. */
+          refresh: client.experimental.config.experimental.mix.refresh,
         },
       },
       /** @deprecated Use `client.experimental.config.update`. Removed in the next minor. */

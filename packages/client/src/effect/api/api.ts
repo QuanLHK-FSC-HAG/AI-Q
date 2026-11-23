@@ -2812,6 +2812,9 @@ export interface ConfigApi<E = never> {
 
       /** @deprecated Use `client.experimental.config.experimental.mix.set`. Removed in the next minor. */
       readonly set: ExperimentalConfigExperimentalMixSetOperation<E>
+
+      /** @deprecated Use `client.experimental.config.experimental.mix.refresh`. Removed in the next minor. */
+      readonly refresh: ExperimentalConfigExperimentalMixRefreshOperation<E>
     }
   }
 
@@ -2872,6 +2875,31 @@ export type ExperimentalConfigExperimentalMixSetOperation<E = never> = (
   input?: ExperimentalConfigExperimentalMixSetInput,
 ) => Effect.Effect<ExperimentalConfigExperimentalMixSetOutput, E>
 
+export type ExperimentalConfigExperimentalMixRefreshOutput = {
+  readonly mix: {
+    readonly hideReal: boolean
+    readonly combos: ReadonlyArray<{
+      readonly id: string
+      readonly name: string
+      readonly enabled?: boolean | undefined
+      readonly candidates: ReadonlyArray<{
+        readonly providerID: string
+        readonly modelID: string
+        readonly variant?: string | undefined
+        readonly weight?: number | undefined
+      }>
+    }>
+  }
+  readonly added: number
+  readonly updated: number
+  readonly skipped: number
+  readonly refreshedAt: number
+}
+export type ExperimentalConfigExperimentalMixRefreshOperation<E = never> = () => Effect.Effect<
+  ExperimentalConfigExperimentalMixRefreshOutput,
+  E
+>
+
 export type ExperimentalConfigUpdateInput = { readonly shell: string | null }
 export type ExperimentalConfigUpdateOutput = void
 export type ExperimentalConfigUpdateOperation<E = never> = (
@@ -2883,6 +2911,7 @@ export interface ExperimentalConfigApi<E = never> {
     readonly mix: {
       readonly get: ExperimentalConfigExperimentalMixGetOperation<E>
       readonly set: ExperimentalConfigExperimentalMixSetOperation<E>
+      readonly refresh: ExperimentalConfigExperimentalMixRefreshOperation<E>
     }
   }
   readonly update: ExperimentalConfigUpdateOperation<E>
@@ -3112,6 +3141,12 @@ export type ConfigExperimentalMixSetOutput = ExperimentalConfigExperimentalMixSe
 
 /** @deprecated Use `ExperimentalConfigExperimentalMixSetOperation`. Removed in the next minor. */
 export type ConfigExperimentalMixSetOperation<E = never> = ExperimentalConfigExperimentalMixSetOperation<E>
+
+/** @deprecated Use `ExperimentalConfigExperimentalMixRefreshOutput`. Removed in the next minor. */
+export type ConfigExperimentalMixRefreshOutput = ExperimentalConfigExperimentalMixRefreshOutput
+
+/** @deprecated Use `ExperimentalConfigExperimentalMixRefreshOperation`. Removed in the next minor. */
+export type ConfigExperimentalMixRefreshOperation<E = never> = ExperimentalConfigExperimentalMixRefreshOperation<E>
 
 /** @deprecated Use `ExperimentalConfigUpdateInput`. Removed in the next minor. */
 export type ConfigUpdateInput = ExperimentalConfigUpdateInput

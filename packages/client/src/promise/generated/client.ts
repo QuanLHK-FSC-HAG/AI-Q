@@ -321,6 +321,7 @@ import type {
   ExperimentalConfigExperimentalMixGetOutput,
   ExperimentalConfigExperimentalMixSetInput,
   ExperimentalConfigExperimentalMixSetOutput,
+  ExperimentalConfigExperimentalMixRefreshOutput,
   ExperimentalConfigUpdateInput,
   ExperimentalConfigUpdateOutput,
 } from "./types.js"
@@ -1760,6 +1761,17 @@ export function make(options: ClientOptions) {
                 },
                 requestOptions,
               ),
+            refresh: (requestOptions?: RequestOptions) =>
+              request<ExperimentalConfigExperimentalMixRefreshOutput>(
+                {
+                  method: "POST",
+                  path: `/api/experimental/mix/refresh`,
+                  successStatus: 200,
+                  declaredStatuses: [400, 401, 404],
+                  empty: false,
+                },
+                requestOptions,
+              ),
           },
         },
         update: (input: ExperimentalConfigUpdateInput, requestOptions?: RequestOptions) =>
@@ -2820,6 +2832,8 @@ export function make(options: ClientOptions) {
           get: client.experimental.config.experimental.mix.get,
           /** @deprecated Use `client.experimental.config.experimental.mix.set`. Removed in the next minor. */
           set: client.experimental.config.experimental.mix.set,
+          /** @deprecated Use `client.experimental.config.experimental.mix.refresh`. Removed in the next minor. */
+          refresh: client.experimental.config.experimental.mix.refresh,
         },
       },
       /** @deprecated Use `client.experimental.config.update`. Removed in the next minor. */
