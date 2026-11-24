@@ -1,4 +1,4 @@
-﻿<div align="center">
+<div align="center">
 
 <img src="packages/desktop/resources/icons/icon.png" alt="AI-Q" width="112" />
 
