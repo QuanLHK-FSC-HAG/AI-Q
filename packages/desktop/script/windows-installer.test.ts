@@ -295,6 +295,38 @@ windows(
   120_000,
 )
 
+// A silent upgrade restores the registered folder from the registry after customInit, so the legacy shared
+// directory can be the folder the install just wrote to. Leaving it must keep the installed app.
+windows(
+  "leaving the shared directory never removes the install directory",
+  async () => {
+    const installer = await harness()
+
+    try {
+      const exe = await installer.compile(
+        "shared-same",
+        `  StrCpy $sharedInstallDir $INSTDIR
+  !insertmacro leaveSharedInstall`,
+      )
+      const install = path.join(installer.dir, "install")
+      await mkdir(path.join(install, "resources"), { recursive: true })
+      await Promise.all(
+        ["AI-Q.exe", "Uninstall AI-Q.exe", "resources/app.asar"].map((file) =>
+          Bun.write(path.join(install, file), "new"),
+        ),
+      )
+
+      expect((await installer.run([exe, `/D=${install}`])).code).toBe(0)
+      expect(await Bun.file(path.join(install, "AI-Q.exe")).text()).toBe("new")
+      expect(await Bun.file(path.join(install, "Uninstall AI-Q.exe")).text()).toBe("new")
+      expect(await Bun.file(path.join(install, "resources/app.asar")).text()).toBe("new")
+    } finally {
+      await installer.cleanup()
+    }
+  },
+  120_000,
+)
+
 // Stand-ins for the app are copies of ping.exe: it exits with 0 when it finishes and 1 when terminated.
 const runningCases = [
   { name: "a manual install stops the app at once", args: [], pings: 30, exitCode: 1 },

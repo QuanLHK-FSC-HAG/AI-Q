@@ -9,6 +9,7 @@ import { BackgroundServiceMachine } from "./background-service-machine"
 import { cleanStages } from "./cli-stages"
 import { keptStages, serviceVersion, shouldRetryEnsure } from "./cli-version"
 import { DesktopCli } from "./desktop-cli"
+import { LegacyService } from "./legacy-service"
 import { SidecarCredentials } from "./sidecar-credentials"
 import { takeSidecarProbe } from "./sidecar-probe"
 
@@ -57,6 +58,15 @@ const probe = Effect.fn("BackgroundService.probe")(function* () {
 const ensure = Effect.fn("BackgroundService.ensure")(function* (mode: BackgroundServiceMachine.ConnectMode) {
   const runFork = Effect.runForkWith(yield* Effect.context<FileSystem.FileSystem | Path.Path>())
   const setup = yield* prepare(mode)
+
+  // A packaged build from before the state directory moved leaves its service running there. The registration
+  // is invisible to this build, so the fixed port stays taken and every contender fails to bind.
+  if (app.isPackaged)
+    yield* LegacyService.stopLegacy({
+      current: setup.file,
+      legacy: setup.legacy,
+      stop: (options) => Effect.tryPromise(() => setup.client.Service.stop(options)),
+    })
 
   const run = (cli = setup.cli, version = setup.version) =>
     setup.client.Service.ensure({
@@ -158,15 +168,18 @@ const prepare = Effect.fn("BackgroundService.prepare")(function* (mode: Backgrou
     channel === "latest" || channel === "dev" || channel === "beta" || channel === "next"
       ? "service.json"
       : `service-${channel.replace(/[^a-zA-Z0-9._-]/g, "-")}.json`
+  const defaultState = path.join(app.getPath("home"), ".local", "state")
   const file = path.join(
-    process.env.XDG_STATE_HOME ?? path.join(app.getPath("home"), ".local", "state"),
+    process.env.XDG_STATE_HOME ?? defaultState,
     // The source CLI registers under XDG_STATE_HOME/opencode (packages/util/src/global.ts);
     // the desktop must watch the same path.
     "opencode",
     name,
   )
+  // Builds that predate the userData state directory registered here, even after an update.
+  const legacy = path.join(defaultState, "opencode", name)
 
-  return { cli, client, file, isolated, version }
+  return { cli, client, file, legacy, isolated, version }
 })
 
 const adopt = Effect.fn("BackgroundService.adopt")(function* (

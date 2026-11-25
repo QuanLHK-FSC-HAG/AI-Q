@@ -650,7 +650,7 @@ test("unresponsive managed port occupancy reports a bounded conflict", async () 
     const output = (await new Response(contender.stdout).text()) + (await new Response(contender.stderr).text())
     expect(output).toContain(
       `Managed service port ${listener.port} on 127.0.0.1 is already in use by ${
-        lsof ? `PID ${process.pid} (` : "another process"
+        process.platform === "win32" || lsof ? `PID ${process.pid} (` : "another process"
       }`,
     )
     if (lsof) expect(await Bun.file(path.join(root, "inherited-state")).text()).toBe(path.join(root, "state"))

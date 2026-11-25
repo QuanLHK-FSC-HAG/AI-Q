@@ -143,7 +143,10 @@ const installAndRestart = Effect.callback<void, Error>((resume) => {
   updateClient.once("error", fail)
 
   try {
-    updateClient.quitAndInstall()
+    // An assisted NSIS installer (oneClick: false) shows its wizard again unless it runs silent. Updating from
+    // inside the app must install in place and restart, not ask the user to walk through setup a second time.
+    if (process.platform === "win32") updateClient.quitAndInstall(true, true)
+    else updateClient.quitAndInstall()
   } catch (error) {
     fail(error instanceof Error ? error : new Error(String(error)))
   }

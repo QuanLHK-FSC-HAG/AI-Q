@@ -349,7 +349,10 @@
 ; channel shared once no other channel's uninstaller is left in it. A taskbar pin still starts the
 ; old executable, so it is pointed at the new one.
 !macro leaveSharedInstall
+  ; A silent upgrade restores the registered folder from the registry after customInit, so the shared directory
+  ; can be the one this install just wrote to. Removing its files would delete the new install.
   ${If} $sharedInstallDir != ""
+  ${AndIf} $sharedInstallDir != $INSTDIR
     Delete "$sharedInstallDir\${APP_EXECUTABLE_FILENAME}"
     Delete "$sharedInstallDir\${UNINSTALL_FILENAME}"
     !insertmacro removeStagedUpdates $sharedInstallDir
