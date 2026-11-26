@@ -8,12 +8,12 @@
 Bạn có ý tưởng – AI-Q giúp biến ý tưởng thành sản phẩm.
 
 [![Website](https://img.shields.io/badge/Website-q--ai--six.vercel.app-1D63D8?style=for-the-badge&logo=vercel&logoColor=white)](https://aiq-quanlhk.vercel.app)
-[![Download](https://img.shields.io/badge/Tải_AI--Q-Windows_.exe-E56F2F?style=for-the-badge&logo=windows&logoColor=white)](https://github.com/QuanLHK-FSC-HAG/AI-Q/releases/download/desktop-0.0.0-prod-202611180254/AI-Q-Setup-win-x64.exe)
+[![Download](https://img.shields.io/badge/Tải_AI--Q-Windows_.exe-E56F2F?style=for-the-badge&logo=windows&logoColor=white)](https://github.com/QuanLHK-FSC-HAG/AI-Q/releases/latest/download/AI-Q-Setup-win-x64.exe)
 [![GitHub](https://img.shields.io/badge/GitHub-AI--Q-249454?style=for-the-badge&logo=github&logoColor=white)](https://github.com/QuanLHK-FSC-HAG/AI-Q)
 
 <br/>
 
-[Trang web](https://aiq-quanlhk.vercel.app) · [Tải AI-Q cho Windows](https://github.com/QuanLHK-FSC-HAG/AI-Q/releases/download/desktop-0.0.0-prod-202611180254/AI-Q-Setup-win-x64.exe) · [Hướng dẫn cài đặt](document/CAI_DAT_VA_CLI.md)
+[Trang web](https://aiq-quanlhk.vercel.app) · [Tải AI-Q cho Windows](https://github.com/QuanLHK-FSC-HAG/AI-Q/releases/latest/download/AI-Q-Setup-win-x64.exe) · [Hướng dẫn cài đặt](document/CAI_DAT_VA_CLI.md)
 
 </div>
 
@@ -46,7 +46,7 @@ AI-Q không chỉ đưa đoạn mã để bạn sao chép. Bạn có thể chọ
 
 ## Tải xuống
 
-- **File mới nhất (Windows):** [AI-Q-Setup-win-x64.exe](https://github.com/QuanLHK-FSC-HAG/AI-Q/releases/download/desktop-0.0.0-prod-202611180254/AI-Q-Setup-win-x64.exe)
+- **File mới nhất (Windows):** [AI-Q-Setup-win-x64.exe](https://github.com/QuanLHK-FSC-HAG/AI-Q/releases/latest/download/AI-Q-Setup-win-x64.exe)
 - **Trang web:** [aiq-quanlhk.vercel.app](https://aiq-quanlhk.vercel.app)
 - **Mã nguồn:** [github.com/QuanLHK-FSC-HAG/AI-Q](https://github.com/QuanLHK-FSC-HAG/AI-Q)
 
